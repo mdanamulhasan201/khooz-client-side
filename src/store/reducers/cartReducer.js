@@ -9,7 +9,6 @@ export const add_to_cart = createAsyncThunk(
 
       return fulfillWithValue(data);
     } catch (error) {
-      console.log(error.response);
       return rejectWithValue(error.response.data);
     }
   }
@@ -71,19 +70,35 @@ export const quantity_decrement = createAsyncThunk(
   }
 );
 
+// wishlist start
+
+export const add_to_wishlist = createAsyncThunk(
+  "wishlist/add_to_wishlist",
+  async (info, { rejectWithValue, fulfillWithValue }) => {
+    try {
+      const { data } = await api.post("/home/product/add-to-wishlist", info);
+      console.log(data);
+
+      return fulfillWithValue(data);
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const cartReducer = createSlice({
   name: "cart",
   initialState: {
     cart_products: [],
     cart_product_count: 0,
     buy_product_item: 0,
-    wishlist_count: 0,
-    wishlist: [],
     price: 0,
     errorMessage: "",
     successMessage: "",
     delivery_cost: 0,
     outofstock_products: [],
+    wishlist_count: 0,
+    wishlist: [],
   },
   reducers: {
     messageClear: (state, _) => {
