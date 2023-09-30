@@ -4,7 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Rating from "../Shared/Rating";
 import { useDispatch, useSelector } from "react-redux";
-import { add_to_cart, messageClear } from "../store/reducers/cartReducer";
+import { add_to_cart, messageClear, add_to_wishlist } from "../store/reducers/cartReducer";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 
@@ -39,6 +39,21 @@ const TopProduct = ({ products }) => {
             dispatch(messageClear())
         }
     }, [successMessage, errorMessage])
+
+    // wishlist
+
+    const add_wishlist = (prod) => {
+        dispatch(add_to_wishlist({
+            userId: userInfo.id,
+            productId: prod._id,
+            name: prod.name,
+            price: prod.price,
+            image: prod.images[1],
+            discount: prod.discount,
+            rating: prod.rating,
+            slug: prod.slug
+        }))
+    }
     return (
         <div className='container mx-auto  mb-20'>
 
@@ -49,7 +64,7 @@ const TopProduct = ({ products }) => {
             <div className='w-full grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center items-center'>
 
                 {
-                    products.map((p, i) => <div key={i} className='border  w-80  group transition-all duration-500 hover:shadow-md hover:-mt-3'>
+                    products.map((p, i) => <div key={i} className='border w-80 transition-all duration-500 hover:shadow-md hover:-mt-3'>
                         <div className='relative overflow-hidden'>
 
                             {
@@ -58,9 +73,12 @@ const TopProduct = ({ products }) => {
 
                             <img className='h-[240px]' src={p.images[1]} alt="Refrigerator Compressor Spare Part" />
 
-                            <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
-                                <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
+                            <ul className='flex justify-center items-center text-xl text-green-500 gap-2  w-full '>
+
+                                <li onClick={() => add_wishlist(p)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
+
                                 <Link to='/product/details/dfgh' className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all' ><FaEye /></Link>
+
                                 <li onClick={() => add_cart(p._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiOutlineShoppingCart /></li>
                             </ul>
                         </div>
