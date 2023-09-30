@@ -1,0 +1,11 @@
+/* Initially hide the arrows */
+.react-multiple-carousel__arrow {
+    display: none;
+  }
+  
+  /* Show the arrows when hovering */
+  .react-multiple-carousel__arrow:hover {
+    display: block; /* or any other value like 'inline-block' */
+    /* You can also add other styles to customize the appearance of the arrows on hover */
+  }
+  

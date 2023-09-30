@@ -1,0 +1,18 @@
+.curved-background {
+    position: relative;
+    padding-top: 4rem; /* Adjust as needed to control the curved shape's height */
+  }
+  
+  .curved-background:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%); /* Adjust the polygon points to control the curve */
+    z-index: -1;
+  }
+  
+  
