@@ -1,4 +1,4 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
@@ -16,19 +16,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_product_details } from "../../store/reducers/homeReducer";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import toast from "react-hot-toast";
+import { add_to_cart, messageClear, add_to_wishlist } from "../../store/reducers/cartReducer";
 
 
 
 
 const ProductDetails = () => {
 
+    const navigate = useNavigate()
     const { slug } = useParams()
     const dispatch = useDispatch()
     const { product, moreProducts } = useSelector(state => state.home)
+    const { userInfo } = useSelector(state => state.auth)
+    const { errorMessage, successMessage } = useSelector(state => state.cart)
 
     const [image, setImage] = useState('')
     const [state, setState] = useState('reviews')
-
+    const [quantity, setQuantity] = useState(1)
 
     const responsive = {
         superLargeDesktop: {
@@ -62,13 +66,8 @@ const ProductDetails = () => {
     }
 
 
-    const [quantity, setQuantity] = useState(1)
-
-
-
-
+    // products increment & decrement
     const increment = () => {
-
         if (quantity >= product.stock) {
             toast.error('Out of stock')
         } else {
@@ -79,6 +78,37 @@ const ProductDetails = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1)
         }
+    }
+
+    // add cart
+
+    const add_cart = () => {
+        if (userInfo) {
+            dispatch(add_to_cart({
+                userId: userInfo.id,
+                quantity,
+                productId: product._id
+            }))
+        } else {
+            navigate('/login')
+        }
+    }
+
+    const add_wishlist = () => {
+        if (userInfo) {
+            dispatch(add_to_wishlist({
+                userId: userInfo.id,
+                productId: product._id,
+                name: product.name,
+                price: product.price,
+                image: product.images[1],
+                discount: product.discount,
+                rating: product.rating,
+                slug: product.slug
+            }))
+        } else {
+            navigate('/login')
+        }
 
     }
 
@@ -86,37 +116,60 @@ const ProductDetails = () => {
         dispatch(get_product_details(slug))
     }, [slug])
 
-    const products = [
-        {
-            id: 1,
-            name: 'Product 1',
-            image: 'https://5.imimg.com/data5/JT/BF/YL/SELLER-45760580/refrigerator-spare-parts.jpg',
-            price: 19.99,
-            rating: 4.5,
-        },
-        {
-            id: 2,
-            name: 'Product 2',
-            image: 'https://5.imimg.com/data5/JT/BF/YL/SELLER-45760580/refrigerator-spare-parts.jpg',
-            price: 29.99,
-            rating: 4.0,
-        },
-        {
-            id: 3,
-            name: 'Product 2',
-            image: 'https://5.imimg.com/data5/JT/BF/YL/SELLER-45760580/refrigerator-spare-parts.jpg',
-            price: 29.99,
-            rating: 4.0,
+    // message handle
+    useEffect(() => {
+        if (errorMessage) {
+            toast.error(errorMessage)
+            dispatch(messageClear())
+
         }
+        if (successMessage) {
+            toast.success(successMessage)
+            dispatch(messageClear())
+
+        }
+    }, [errorMessage, successMessage])
 
 
 
 
+    // buy products 
+
+    const buy = () => {
+        let price = 0;
+        if (product.discount !== 0) {
+            price = product.price - Math.floor((product.price * product.discount) / 100)
+        } else {
+            price = product.price
+        }
+        // formate create
+        const obj = [
+            {
+                sellerId: product.sellerId,
+                shopName: product.shopName,
+                price: quantity * (price - Math.floor((price * 5) / 100)), //owner 5% cut
+                products: [
+                    {
+                        quantity,
+                        productInfo: product
+                    }
+                ]
+            }
+        ]
+        navigate('/shipping', {
+            state: {
+                products: obj,
+                price: price * quantity,
+                delivery_cost: 100,
+                items: 1
+
+            }
+        })
+    }
 
 
 
-        // Add more product objects as needed
-    ];
+
     return (
         <>
             <Navbar></Navbar>
@@ -207,22 +260,22 @@ const ProductDetails = () => {
                                         {
                                             product.stock ? <>
                                                 <div className="flex bg-slate-200 h-[50px] justify-center items-center text-xl ">
-                                                    <div onClick={() => decrement()} className='px-3 cursor-pointer '>
+                                                    <div onClick={decrement} className='px-3 cursor-pointer '>
                                                         <FiMinus className="text-red-400"></FiMinus>
                                                     </div>
                                                     <div className="px-6 ">{quantity}</div>
-                                                    <div onClick={() => increment()} className='px-3 cursor-pointer'>
+                                                    <div onClick={increment} className='px-3 cursor-pointer'>
                                                         <FiPlus className="text-green-500"></FiPlus>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button className="px-10 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-blue-500/40 bg-green-500 text-white"> Cart</button>
+                                                    <button onClick={add_cart} className="px-10 py-3 h-[50px] w-[170px] cursor-pointer hover:shadow-lg hover:shadow-blue-500/40 bg-green-500 text-white"> Add to Cart</button>
                                                 </div>
                                             </> : ''
                                         }
 
                                         <div>
-                                            <div className="h-[50px] w-[50px] flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white">
+                                            <div onClick={add_wishlist} className="h-[50px] w-[40px] flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white">
                                                 <span className="text-lg">
                                                     <AiFillHeart></AiFillHeart>
                                                 </span>
@@ -244,7 +297,7 @@ const ProductDetails = () => {
                                     </div>
                                     <div className='flex gap-3'>
                                         {
-                                            product.stock ? <button className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white'>Buy Now</button> : ""
+                                            product.stock ? <button onClick={buy} className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white'>Buy Now</button> : ""
                                         }
                                         <Link to='' className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-green-500/40 bg-green-500 text-white block'>Chat Seller</Link>
                                     </div>
@@ -266,7 +319,7 @@ const ProductDetails = () => {
                                         </div>
                                         <div className="">
                                             {
-                                                state === 'reviews' ? <Reviews></Reviews> : <p className="py-5 text-slate-600">{product.description}</p>
+                                                state === 'reviews' ? <Reviews product={product}></Reviews> : <p className="py-5 text-slate-600">{product.description}</p>
                                             }
                                         </div>
                                     </div>
@@ -274,7 +327,7 @@ const ProductDetails = () => {
                                 <div className="w-full sm:w-full md:w-[27%] lg:w-[27%] xl:w-[27%]">
                                     <div className='pl-4 sm:pl-0'>
                                         <div className='px-3 py-1 text-slate-600 bg-slate-200'>
-                                            <h2> From Anamul Store</h2>
+                                            <h2> From {product.shopName}</h2>
                                         </div>
                                         <div className='flex flex-col items-center gap-5 mt-3 border p-3'>
                                             {
@@ -286,7 +339,7 @@ const ProductDetails = () => {
                                                                     {
                                                                         p.discount ? <div className='flex justify-center items-center absolute badge bg-green-500 text-white  font-semibold text-xs right-2 top-2'>-{p.discount}%</div> : ''
                                                                     }
-                                                                    <img className='h-[240px]' src={p.images[1]} alt={products.name} />
+                                                                    <img className='h-[240px]' src={p.images[1]} alt={product.name} />
                                                                     <ul className='flex transition-all duration-700 -bottom-10 justify-center items-center gap-2 absolute w-full group-hover:bottom-3'>
                                                                         <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
 

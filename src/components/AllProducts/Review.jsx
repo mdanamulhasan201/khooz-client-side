@@ -1,17 +1,50 @@
-import { useState } from "react";
-
-
+import { useEffect, useState } from "react";
 import RatingReact from 'react-rating'
 import { CiStar } from "react-icons/ci";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Rating from "../../Shared/Rating";
 import RatingTemp from "../../Shared/RatingTemp";
-const Reviews = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { customer_review, messageClear } from "../../store/reducers/homeReducer";
+import toast from "react-hot-toast";
+
+
+const Reviews = ({ product }) => {
+
+
+    const dispatch = useDispatch()
+    const { userInfo } = useSelector(state => state.auth)
+    const { successMessage, errorMessage } = useSelector(state => state.home)
+    const [rat, setRat] = useState('')
+    const [review, setReview] = useState('')
+
     const reviewsPerPage = 5; // Number of reviews to display per page
     const [currentPage, setCurrentPage] = useState(1);
-    const userInfo = {}
-    const [rat, setRat] = useState('')
+
+    const review_submit = (e) => {
+        e.preventDefault()
+        const obj = {
+            name: userInfo.name,
+            review: review,
+            rating: rat,
+            productId: product._id
+        }
+        dispatch(customer_review(obj))
+    }
+
+
+    useEffect(() => {
+
+        if (successMessage) {
+            toast.success(successMessage)
+            setRat('')
+            setReview('')
+            dispatch(messageClear())
+
+        }
+    }, [errorMessage, successMessage])
+
 
     // Sample review data (replace with your actual data)
     const reviews = [
@@ -111,15 +144,7 @@ const Reviews = () => {
                         </div>
                         <p className="text-sm text-slate-600 w-[0%]">5</p>
                     </div>
-                    <div className="flex justify-start items-center gap-5 ">
-                        <div className="text-md flex gap-1 w-[94px]">
-                            <RatingTemp rating={0}></RatingTemp>
-                        </div>
-                        <div className="w-[200px] h-[14px] bg-slate-200 relative">
-                            <div className="h-full bg-red-400 w-[0%]"></div>
-                        </div>
-                        <p className="text-sm text-slate-600 w-[0%]">4</p>
-                    </div>
+
 
                 </div>
             </div>
@@ -169,8 +194,8 @@ const Reviews = () => {
                         ></RatingReact>
 
                     </div>
-                    <form action="">
-                        <textarea className="border outline-0 p-3 w-full" name="" id="" cols="30" rows="5"></textarea>
+                    <form onSubmit={review_submit} action="">
+                        <textarea value={review} required onChange={(e) => setReview(e.target.value)} className="border outline-0 p-3 w-full" name="" id="" cols="30" rows="5"></textarea>
                         <div className="mt-2">
                             <button className="py-1 px-5 bg-blue-500 text-white rounded-sm">Submit</button>
                         </div>

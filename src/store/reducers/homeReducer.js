@@ -33,7 +33,6 @@ export const get_product_details = createAsyncThunk(
   async (slug, { fulfillWithValue }) => {
     try {
       const { data } = await api.get(`/home/get-product-details/${slug}`);
-      console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response);
@@ -73,6 +72,19 @@ export const query_products = createAsyncThunk(
   }
 );
 
+// customer review
+export const customer_review = createAsyncThunk(
+  "review/customer_review",
+  async (info, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/home/customer/add-review", info);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+);
+
 export const homeReducer = createSlice({
   name: "home",
   initialState: {
@@ -89,9 +101,16 @@ export const homeReducer = createSlice({
     },
     product: {},
     moreProducts: [],
+    successMessage: "",
+    errorMessage: "",
   },
 
-  reducers: {},
+  reducers: {
+    messageClear: (state, _) => {
+      state.successMessage = "";
+      state.errorMessage = "";
+    },
+  },
 
   extraReducers: {
     [get_category.fulfilled]: (state, { payload }) => {
@@ -119,7 +138,10 @@ export const homeReducer = createSlice({
       state.totalProduct = payload.totalProduct;
       state.parPage = payload.parPage;
     },
+    [customer_review.fulfilled]: (state, { payload }) => {
+      state.successMessage = payload.message;
+    },
   },
 });
-
+export const { messageClear } = homeReducer.actions;
 export default homeReducer.reducer;
