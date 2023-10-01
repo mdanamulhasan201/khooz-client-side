@@ -27,6 +27,19 @@ export const get_products = createAsyncThunk(
     }
   }
 );
+// product details
+export const get_product_details = createAsyncThunk(
+  "product/get_product_details",
+  async (slug, { fulfillWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/get-product-details/${slug}`);
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+);
 
 //get products
 export const price_range_product = createAsyncThunk(
@@ -74,6 +87,8 @@ export const homeReducer = createSlice({
       low: 0,
       high: 10000,
     },
+    product: {},
+    moreProducts: [],
   },
 
   reducers: {},
@@ -82,11 +97,17 @@ export const homeReducer = createSlice({
     [get_category.fulfilled]: (state, { payload }) => {
       state.categorys = payload.categorys;
     },
+
     [get_products.fulfilled]: (state, { payload }) => {
       state.products = payload.products;
       state.latest_product = payload.latest_product;
       state.topRated_product = payload.topRated_product;
       state.discount_product = payload.discount_product;
+    },
+
+    [get_product_details.fulfilled]: (state, { payload }) => {
+      state.product = payload.product;
+      state.moreProducts = payload.moreProducts;
     },
 
     [price_range_product.fulfilled]: (state, { payload }) => {

@@ -12,7 +12,7 @@ function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
     const { userInfo } = useSelector(state => state.auth)
-    const { cart_product_count } = useSelector(state => state.cart)
+    const { cart_product_count, add_to_wishlist } = useSelector(state => state.cart)
     const navigate = useNavigate()
 
     // const userInfo = 
@@ -94,9 +94,12 @@ function Navbar() {
                             <div className='flex justify-center gap-5'>
                                 <div className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
                                     <span className='text-xl text-red-400'><AiFillHeart /></span>
-                                    <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
-                                        {wishlist}
+                                    {
+                                        add_to_wishlist !== 0 &&  <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
+                                        {add_to_wishlist}
                                     </div>
+                                    }
+                                   
                                 </div>
 
                                 <div onClick={redirect_cart_page} className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
