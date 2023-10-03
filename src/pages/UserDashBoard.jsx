@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../Shared/Footer';
 import { FaList } from 'react-icons/fa';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet,NavLink } from 'react-router-dom';
 import { MdOutlineDashboard, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { BsBookmarkHeart, BsChat } from 'react-icons/bs';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BiLogOutCircle } from 'react-icons/bi';
+
 
 const UserDashBoard = () => {
     const [filterShow, setFilterShow] = useState(false)
@@ -27,23 +28,23 @@ const UserDashBoard = () => {
                             <ul className='py-2 text-slate-600 px-4'>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><MdOutlineDashboard></MdOutlineDashboard> </span>
-                                    <Link to='/dashboard' className='block'>Dashboard</Link>
+                                    <NavLink to='/dashboard' className='block'>Dashboard</NavLink>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><MdOutlineProductionQuantityLimits></MdOutlineProductionQuantityLimits> </span>
-                                    <Link to='/dashboard/myOrders' className='block'>My Orders</Link>
+                                    <NavLink to='/dashboard/myOrders' className='block'>My Orders</NavLink>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BsBookmarkHeart></BsBookmarkHeart> </span>
-                                    <Link to='/dashboard/wishList' className='block'>Wishlist</Link>
+                                    <NavLink to='/dashboard/wishList' className='block'>Wishlist</NavLink>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BsChat></BsChat> </span>
-                                    <Link to='/dashboard/myChat' className='block'>Chat</Link>
+                                    <NavLink to='/dashboard/myChat' className='block'>Chat</NavLink>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><RiLockPasswordLine></RiLockPasswordLine> </span>
-                                    <Link to='/dashboard/changePassword' className='block'>Change Password</Link>
+                                    <NavLink to='/dashboard/changePassword' className='block'>Change Password</NavLink>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BiLogOutCircle></BiLogOutCircle> </span>

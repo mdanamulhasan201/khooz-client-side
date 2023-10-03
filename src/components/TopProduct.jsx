@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 
 
+
 const TopProduct = ({ products }) => {
 
     const navigate = useNavigate()
@@ -28,6 +29,7 @@ const TopProduct = ({ products }) => {
             navigate('/login')
         }
     }
+
 
     useEffect(() => {
         if (successMessage) {
@@ -54,6 +56,8 @@ const TopProduct = ({ products }) => {
             slug: prod.slug
         }))
     }
+
+
     return (
         <div className='container mx-auto  mb-20'>
 

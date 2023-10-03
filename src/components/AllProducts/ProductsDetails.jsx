@@ -26,7 +26,7 @@ const ProductDetails = () => {
     const navigate = useNavigate()
     const { slug } = useParams()
     const dispatch = useDispatch()
-    const { product, moreProducts } = useSelector(state => state.home)
+    const { product, moreProducts,totalReview } = useSelector(state => state.home)
     const { userInfo } = useSelector(state => state.auth)
     const { errorMessage, successMessage } = useSelector(state => state.cart)
 
@@ -232,7 +232,7 @@ const ProductDetails = () => {
                                         <div className="flex text-xl">
                                             <Rating ratings={product.rating} />
                                         </div>
-                                        <span className="text-green-500">(22 reviews)</span>
+                                        <span className="text-green-500">({totalReview})</span>
 
                                     </div>
                                     <div className="  flex gap-3">

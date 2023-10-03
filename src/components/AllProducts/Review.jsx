@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Rating from "../../Shared/Rating";
 import RatingTemp from "../../Shared/RatingTemp";
 import { useDispatch, useSelector } from "react-redux";
-import { customer_review, messageClear } from "../../store/reducers/homeReducer";
+import { customer_review, messageClear, get_reviews, get_product_details } from "../../store/reducers/homeReducer";
 import toast from "react-hot-toast";
 
 
@@ -15,7 +15,7 @@ const Reviews = ({ product }) => {
 
     const dispatch = useDispatch()
     const { userInfo } = useSelector(state => state.auth)
-    const { successMessage, errorMessage } = useSelector(state => state.home)
+    const { successMessage, errorMessage, reviews, totalReview, rating_review } = useSelector(state => state.home)
     const [rat, setRat] = useState('')
     const [review, setReview] = useState('')
 
@@ -38,6 +38,11 @@ const Reviews = ({ product }) => {
 
         if (successMessage) {
             toast.success(successMessage)
+            dispatch(get_reviews({
+                productId: product._id,
+                // pageNumber
+            }))
+            dispatch(get_product_details(product.slug))
             setRat('')
             setReview('')
             dispatch(messageClear())
@@ -45,32 +50,16 @@ const Reviews = ({ product }) => {
         }
     }, [errorMessage, successMessage])
 
+    useEffect(() => {
+        if (product._id) {
+            dispatch(get_reviews({
+                productId: product._id,
+                // pageNumber
+            }))
+        }
+    }, [product])
 
-    // Sample review data (replace with your actual data)
-    const reviews = [
-        {
-            id: 1,
-            rating: 4,
-            date: '7 Sept 2023',
-            author: 'Anamul Hasan',
-            content: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit...',
-        },
-        {
-            id: 2,
-            rating: 5,
-            date: '5 Sept 2023',
-            author: 'John Doe',
-            content: 'Great product! Highly recommended.',
-        },
-        {
-            id: 3,
-            rating: 3,
-            date: '3 Sept 2023',
-            author: 'Jane Smith',
-            content: 'Could be better, but not bad.',
-        },
-        // Add more review objects as needed
-    ];
+
 
     // Calculate the total number of pages
     const totalPages = Math.ceil(reviews.length / reviewsPerPage);
@@ -90,13 +79,13 @@ const Reviews = ({ product }) => {
             <div className="flex gap-10 ">
                 <div className="flex flex-col gap-2 justify-start items-center py-4 ">
                     <div>
-                        <span className="text-6xl font-semibold">4.5</span>
+                        <span className="text-6xl font-semibold">{product.rating}</span>
                         <span className="text-3xl font-semibold text-slate-600">/5</span>
                     </div>
                     <div className="flex text-4xl">
-                        <Rating ratings={4.5}></Rating>
+                        <Rating ratings={product.rating}></Rating>
                     </div>
-                    <p className="text-sm text-slate-600">23 Ratings</p>
+
                 </div>
                 <div className="flex gap-2 flex-col py-4 ">
                     <div className="flex justify-start items-center gap-5 ">
@@ -104,63 +93,73 @@ const Reviews = ({ product }) => {
                             <RatingTemp rating={5}></RatingTemp>
                         </div>
                         <div className="w-[200px] h-[14px] bg-slate-200 relative">
-                            <div className="h-full bg-red-400 w-[60%]"></div>
+                            <div style={{ width: `${Math.floor((100 * (rating_review[0]?.sum || 0)) / totalReview)}%` }} className="h-full bg-red-400 "></div>
                         </div>
-                        <p className="text-sm text-slate-600 w-[0%]">10</p>
+                        <p className="text-sm text-slate-600 w-[0%]">{rating_review[0]?.sum}</p>
                     </div>
                     <div className="flex justify-start items-center gap-5 ">
                         <div className="text-md flex gap-1 w-[94px]">
                             <RatingTemp rating={4}></RatingTemp>
                         </div>
                         <div className="w-[200px] h-[14px] bg-slate-200 relative">
-                            <div className="h-full bg-red-400 w-[70%]"></div>
+                            <div style={{ width: `${Math.floor((100 * (rating_review[1]?.sum || 0)) / totalReview)}%` }} className="h-full bg-red-400 "></div>
                         </div>
-                        <p className="text-sm text-slate-600 w-[0%]">50</p>
+                        <p className="text-sm text-slate-600 w-[0%]">{rating_review[1]?.sum}</p>
                     </div>
                     <div className="flex justify-start items-center gap-5 ">
                         <div className="text-md flex gap-1 w-[94px]">
                             <RatingTemp rating={3}></RatingTemp>
                         </div>
                         <div className="w-[200px] h-[14px] bg-slate-200 relative">
-                            <div className="h-full bg-red-400 w-[75%]"></div>
+                            <div style={{ width: `${Math.floor((100 * (rating_review[2]?.sum || 0)) / totalReview)}%` }} className="h-full bg-red-400"></div>
                         </div>
-                        <p className="text-sm text-slate-600 w-[0%]">70</p>
+                        <p className="text-sm text-slate-600 w-[0%]">{rating_review[2]?.sum}</p>
                     </div>
                     <div className="flex justify-start items-center gap-5 ">
                         <div className="text-md flex gap-1 w-[94px]">
                             <RatingTemp rating={2}></RatingTemp>
                         </div>
                         <div className="w-[200px] h-[14px] bg-slate-200 relative">
-                            <div className="h-full bg-red-400 w-[40%]"></div>
+                            <div style={{ width: `${Math.floor((100 * (rating_review[3]?.sum || 0)) / totalReview)}%` }} className="h-full bg-red-400"></div>
                         </div>
-                        <p className="text-sm text-slate-600 w-[0%]">15</p>
+                        <p className="text-sm text-slate-600 w-[0%]">{rating_review[3]?.sum}</p>
                     </div>
                     <div className="flex justify-start items-center gap-5 ">
                         <div className="text-md flex gap-1 w-[94px]">
                             <RatingTemp rating={1}></RatingTemp>
                         </div>
                         <div className="w-[200px] h-[14px] bg-slate-200 relative">
-                            <div className="h-full bg-red-400 w-[20%]"></div>
+                            <div style={{ width: `${Math.floor((100 * (rating_review[4]?.sum || 0)) / totalReview)}%` }} className="h-full bg-red-400 "></div>
                         </div>
-                        <p className="text-sm text-slate-600 w-[0%]">5</p>
+                        <p className="text-sm text-slate-600 w-[0%]">{rating_review[4]?.sum}</p>
+                    </div>
+                    <div className="flex justify-start items-center gap-5 ">
+                        <div className="text-md flex gap-1 w-[94px]">
+                            <RatingTemp rating={0}></RatingTemp>
+                        </div>
+                        <div className="w-[200px] h-[14px] bg-slate-200 relative">
+                            <div className="h-full bg-red-400 "></div>
+                        </div>
+                        <p className="text-sm text-slate-600 w-[0%]">0</p>
                     </div>
 
 
                 </div>
             </div>
 
-            <h2 className="text-slate-600 text-xl font-bold py-5">Products Reviews 30</h2>
+            <h2 className="text-slate-600 text-xl font-bold py-5">Products Reviews {totalReview}</h2>
             <div className="flex flex-col gap-8 pb-10 pt-4">
                 {currentReviews.map((review, i) => (
                     <div key={i} className="flex flex-col gap-1">
                         <div className="flex justify-between items-center">
-                            <div className="flex gap-1 text-xl">
-                                <RatingTemp rating={review.rating}></RatingTemp>
-                            </div>
+                            <span className="text-slate-600 text-md ">{review.name}</span>
+
                             <span className="text-slate-600">{review.date}</span>
                         </div>
-                        <span className="text-slate-600 text-md ">{review.author}</span>
-                        <p className="text-slate-600 text-sm ">{review.content}</p>
+                        <div className="flex gap-1 text-xl">
+                            <RatingTemp rating={review.rating}></RatingTemp>
+                        </div>
+                        <p className="text-slate-600 text-sm ">{review.review}</p>
                     </div>
                 ))}
             </div>

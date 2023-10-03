@@ -84,6 +84,45 @@ export const customer_review = createAsyncThunk(
     }
   }
 );
+export const get_reviews = createAsyncThunk(
+  "review/get_reviews",
+  async ({ productId }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const { data } = await api.get(`/home/customer/get-reviews/${productId}`);
+      console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+);
+
+// provider review sections
+
+export const provider_review = createAsyncThunk(
+  "reviews/provider_review",
+  async (info, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const { data } = await api.post("/home/provider/submit-review", info);
+      return fulfillWithValue(data);
+    } catch (error) {}
+  }
+);
+
+export const get_provider_reviews = createAsyncThunk(
+  "reviews/get_provider_reviews",
+  async ({ sellerId }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const { data } = await api.get(
+        `/home/provider/get-provider-reviews/${sellerId}`
+      );
+      // console.log(data);
+      return fulfillWithValue(data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+);
 
 export const homeReducer = createSlice({
   name: "home",
@@ -103,6 +142,12 @@ export const homeReducer = createSlice({
     moreProducts: [],
     successMessage: "",
     errorMessage: "",
+    totalReview: 0,
+    rating_review: [],
+    reviews: [],
+    totalReviews: 0,
+    rating_reviews: [],
+    reviewss: [],
   },
 
   reducers: {
@@ -140,6 +185,21 @@ export const homeReducer = createSlice({
     },
     [customer_review.fulfilled]: (state, { payload }) => {
       state.successMessage = payload.message;
+    },
+    [get_reviews.fulfilled]: (state, { payload }) => {
+      state.reviews = payload.reviews;
+      state.totalReview = payload.totalReview;
+      state.rating_review = payload.rating_review;
+    },
+
+    [provider_review.fulfilled]: (state, { payload }) => {
+      state.successMessage = payload.message;
+    },
+
+    [get_provider_reviews.fulfilled]: (state, { payload }) => {
+      state.reviewss = payload.reviewss;
+      state.totalReviews = payload.totalReviews;
+      state.rating_reviews = payload.rating_reviews;
     },
   },
 });

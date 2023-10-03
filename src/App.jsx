@@ -20,6 +20,7 @@ import Orders from './components/Dashboard/Orders';
 import WishList from './components/Dashboard/WishList';
 import ChangePassword from './components/Dashboard/ChangePassword';
 import OrderDetails from './components/Dashboard/OrderDetails';
+import ProviderDetails from './components/ProviderDetails';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         <Route path='/products/search?' element={<SearchProducts></SearchProducts>} />
         <Route path='/product/details/:slug' element={<ProductDetails></ProductDetails>} />
         <Route path='/allProviders' element={<AllProviders></AllProviders>} />
+        <Route path='/provider/details/:sellerId' element={<ProviderDetails></ProviderDetails>} />
         <Route path='/cart' element={<Cart></Cart>} />
         <Route path='/shipping' element={<Shipping></Shipping>} />
         <Route path='/payment' element={<Payments></Payments>} />
