@@ -26,7 +26,7 @@ const ProductDetails = () => {
     const navigate = useNavigate()
     const { slug } = useParams()
     const dispatch = useDispatch()
-    const { product, moreProducts,totalReview } = useSelector(state => state.home)
+    const { product, moreProducts, totalReview } = useSelector(state => state.home)
     const { userInfo } = useSelector(state => state.auth)
     const { errorMessage, successMessage } = useSelector(state => state.cart)
 
@@ -259,7 +259,7 @@ const ProductDetails = () => {
                                     <div className="flex gap-3 pb-3 border-b">
                                         {
                                             product.stock ? <>
-                                                <div className="flex bg-slate-200 h-[50px] justify-center items-center text-xl ">
+                                                <div className="flex bg-slate-200 h-[50px] justify-center items-center text-xl rounded-md">
                                                     <div onClick={decrement} className='px-3 cursor-pointer '>
                                                         <FiMinus className="text-red-400"></FiMinus>
                                                     </div>
@@ -269,13 +269,13 @@ const ProductDetails = () => {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <button onClick={add_cart} className="px-10 py-3 h-[50px] w-[170px] cursor-pointer hover:shadow-lg hover:shadow-blue-500/40 bg-green-500 text-white"> Add to Cart</button>
+                                                    <button onClick={add_cart} className="px-10 rounded-md py-3 h-[50px] w-[170px] cursor-pointer hover:shadow-lg hover:shadow-blue-500/40 bg-green-500 text-white"> Add to Cart</button>
                                                 </div>
                                             </> : ''
                                         }
 
                                         <div>
-                                            <div onClick={add_wishlist} className="h-[50px] w-[40px] flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white">
+                                            <div onClick={add_wishlist} className="h-[50px] w-[40px] flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white rounded-md">
                                                 <span className="text-lg">
                                                     <AiFillHeart></AiFillHeart>
                                                 </span>
@@ -284,7 +284,7 @@ const ProductDetails = () => {
 
                                     </div>
                                     <div className='flex py-5 gap-5'>
-                                        <div className='w-[150px] text-black font-bold text-xl flex flex-col gap-5'>
+                                        <div className='w-[150px] text-black font-bold text-xl flex flex-col gap-5 '>
                                             <span>Availability</span>
 
                                         </div>
@@ -292,14 +292,13 @@ const ProductDetails = () => {
                                             <span className={`text-${product.stock ? 'green' : 'red'}-500`}>
                                                 {product.stock ? `In Stock(${product.stock})` : 'Out of Stock'}
                                             </span>
-
                                         </div>
                                     </div>
                                     <div className='flex gap-3'>
                                         {
-                                            product.stock ? <button onClick={buy} className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white'>Buy Now</button> : ""
+                                            product.stock ? <button onClick={buy} className='px-8 py-3 rounded-md h-[50px] cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white'>Buy Now</button> : ""
                                         }
-                                        <Link to='' className='px-8 py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-green-500/40 bg-green-500 text-white block'>Chat Seller</Link>
+                                        <Link to={`/dashboard/chat/${product.sellerId}`} className='px-8 rounded-md py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-green-500/40 bg-green-500 text-white block'>Chat Seller</Link>
                                     </div>
                                 </div>
                             </div>
@@ -313,9 +312,9 @@ const ProductDetails = () => {
                             <div className="flex flex-wrap gap-3">
                                 <div className="w-full sm:w-full md:w-[72%] lg:w-[72%] xl:w-[72%] 2xl:w-[72%]">
                                     <div className="pr-4 sm:pr-0">
-                                        <div className="grid grid-cols-2">
-                                            <button onClick={() => setState('reviews')} className={`py-1 px-5 hover:text-white mb-2 hover:bg-gray-500 ${state === 'reviews' ? 'bg-gray-500 text-white' : 'bg-slate-200 text-slate-700'}`}>Reviews</button>
-                                            <button onClick={() => setState('description')} className={`py-1 px-5 mb-2 hover:text-white hover:bg-gray-500 ${state === 'description' ? 'bg-gray-500 text-white' : 'bg-slate-200 text-slate-700'}`}>Description</button>
+                                        <div className="grid grid-cols-2 gap-2">
+                                            <button onClick={() => setState('reviews')} className={`py-1 rounded-full px-5 hover:text-white mb-2 hover:bg-gray-500 ${state === 'reviews' ? 'bg-gray-500 text-white ' : 'bg-slate-200 text-slate-700'}`}>Reviews</button>
+                                            <button onClick={() => setState('description')} className={`py-1 px-5 mb-2 rounded-full hover:text-white hover:bg-gray-500 ${state === 'description' ? 'bg-gray-500 text-white' : 'bg-slate-200 text-slate-700'}`}>Description</button>
                                         </div>
                                         <div className="">
                                             {
@@ -326,7 +325,7 @@ const ProductDetails = () => {
                                 </div>
                                 <div className="w-full sm:w-full md:w-[27%] lg:w-[27%] xl:w-[27%]">
                                     <div className='pl-4 sm:pl-0'>
-                                        <div className='px-3 py-1 text-slate-600 bg-slate-200'>
+                                        <div className='px-3 py-1 text-slate-600 bg-slate-200 rounded'>
                                             <h2> From {product.shopName}</h2>
                                         </div>
                                         <div className='flex flex-col items-center gap-5 mt-3 border p-3'>

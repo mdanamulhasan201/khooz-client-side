@@ -89,7 +89,7 @@ export const get_reviews = createAsyncThunk(
   async ({ productId }, { fulfillWithValue, rejectWithValue }) => {
     try {
       const { data } = await api.get(`/home/customer/get-reviews/${productId}`);
-      console.log(data);
+      // console.log(data);
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response);

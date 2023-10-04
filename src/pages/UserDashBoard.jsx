@@ -40,7 +40,7 @@ const UserDashBoard = () => {
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BsChat></BsChat> </span>
-                                    <NavLink to='/dashboard/myChat' className='block'>Chat</NavLink>
+                                    <NavLink to='/dashboard/chat' className='block'>Chat</NavLink>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><RiLockPasswordLine></RiLockPasswordLine> </span>

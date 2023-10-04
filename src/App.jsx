@@ -21,6 +21,7 @@ import WishList from './components/Dashboard/WishList';
 import ChangePassword from './components/Dashboard/ChangePassword';
 import OrderDetails from './components/Dashboard/OrderDetails';
 import ProviderDetails from './components/ProviderDetails';
+import Chat from './components/Dashboard/Chat';
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
             <Route path='order/details/:orderId' element={<OrderDetails></OrderDetails>}></Route>
             <Route path='wishList' element={<WishList></WishList>}></Route>
             <Route path='changePassword' element={<ChangePassword></ChangePassword>}></Route>
+            <Route path='chat' element={<Chat></Chat>}></Route>
+            <Route path='chat/:sellerId' element={<Chat></Chat>}></Route>
 
           </Route>
         </Route>
