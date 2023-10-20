@@ -18,7 +18,7 @@ const Orders = () => {
             status: state, customerId: userInfo.id
         }))
     }, [state])
-  
+
 
 
     const redirect = (ord) => {
@@ -62,20 +62,30 @@ const Orders = () => {
 
                             </thead>
                             <tbody>
-                            {
-                                   myOrders.map((o, i) => <tr key={i} className='bg-white border-b'>
+                                {
+                                    myOrders.map((o, i) => <tr key={i} className='bg-white border-b'>
                                         <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o._id}</td>
                                         <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.price} Tk</td>
-                                        <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.payment_status}</td>
+                                        <td scope='row' className={`px-6 py-4 font-medium whitespace-nowrap ${o.payment_status === 'paid' ? 'text-green-400' : 'text-red-400'}`}>
+                                            {o.payment_status}
+                                        </td>
                                         <td scope='row' className='px-6 py-4 font-medium whitespace-nowrap'>{o.delivery_status}</td>
                                         <td scope='row' className='px-6 py-4 '>
                                             <div className='flex flex-col md:flex-row gap-2 md:gap-0 md:space-x-2 space-x-0'>
                                                 <Link to={`/dashboard/order/details/${o._id}`}>
-                                                    <span className='bg-green-100 text-green-500 text-xs font-normal px-2 py-[1px]'>
+                                                    <span className='bg-green-100 text-green-500 text-xs  px-2 py-[1px] font-semibold'>
                                                         View
                                                     </span>
                                                 </Link>
-                                                <span onClick={()=>redirect(o)} className='bg-red-50 cursor-pointer whitespace-nowrap text-red-400 text-xs font-normal px-2 py-[1px]'>Pay Now</span>
+                                                {o.payment_status === 'paid' ? (
+                                                    <span className='bg-green-100 text-green-500 cursor-not-allowed whitespace-nowrap  text-xs  px-2 py-[1px] font-semibold' disabled>
+                                                        Paid
+                                                    </span>
+                                                ) : (
+                                                    <span onClick={() => redirect(o)} className='bg-red-50 cursor-pointer whitespace-nowrap text-red-400 text-xs  px-2 py-[1px] font-semibold'>
+                                                        Pay Now
+                                                    </span>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>)

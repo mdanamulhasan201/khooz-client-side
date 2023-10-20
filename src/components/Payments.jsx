@@ -26,21 +26,21 @@ const Payments = () => {
                                         </div>
                                         <div onClick={() => setPaymentMethod('bkash')} className={`w-[20%] border-r cursor-pointer py-8 px-12 ${paymentMethod === 'bkash' ? 'bg-white border-t' : 'bg-[#F8F5FF]'}`}>
                                             <div className='flex flex-col gap-[3px] justify-center items-center'>
-                                                <img className='' src='http://localhost:3001/images/payment/bkash.png' alt="bkash" />
+                                                <img className='' src='http://localhost:3000/images/payment/bkash.png' alt="bkash" />
                                                 <span className='text-slate-600 '>bKash</span>
 
                                             </div>
                                         </div>
                                         <div onClick={() => setPaymentMethod('nagad')} className={`w-[20%] border-r cursor-pointer py-8 px-12 ${paymentMethod === 'nagad' ? 'bg-white border-t' : 'bg-[#F8F5FF]'}`}>
                                             <div className='flex flex-col gap-[3px] justify-center items-center'>
-                                                <img className='' src='http://localhost:3001/images/payment/nogot.png' alt="nagad" />
+                                                <img className='' src='http://localhost:3000/images/payment/nogot.png' alt="nagad" />
                                                 <span className='text-slate-600 '>Nagad</span>
 
                                             </div>
                                         </div>
                                         <div onClick={() => setPaymentMethod('rocket')} className={`w-[20%] border-r cursor-pointer py-8 px-12 ${paymentMethod === 'rocket' ? 'bg-white border-t' : 'bg-[#F8F5FF]'}`}>
                                             <div className='flex flex-col gap-[3px] justify-center items-center'>
-                                                <img className='' src='http://localhost:3001/images/payment/roket.png' alt="rocket" />
+                                                <img className='' src='http://localhost:3000/images/payment/roket.png' alt="rocket" />
                                                 <span className='text-slate-600 '>Rocket</span>
 
                                             </div>

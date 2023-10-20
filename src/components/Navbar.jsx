@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHeart, AiFillShopping } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
 import { useSelector } from "react-redux";
+import logo from '../../src/assets/logo.png'
 
 function Navbar() {
 
@@ -52,7 +53,9 @@ function Navbar() {
                     <div className="relative flex items-center justify-between h-16">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
-                                <Link className="" to='/'><h1 className="text-black text-2xl font-bold">Khooz</h1></Link>
+                                <Link className="" to='/'>
+                                    <img className="md:w-36 md:h-16 w-20 h-14" src={logo} alt="" />
+                                </Link>
                             </div>
                             <div className="hidden md:block">
                                 <div className="ml-10 flex items-baseline space-x-4">

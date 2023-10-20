@@ -22,6 +22,7 @@ import ChangePassword from './components/Dashboard/ChangePassword';
 import OrderDetails from './components/Dashboard/OrderDetails';
 import ProviderDetails from './components/ProviderDetails';
 import Chat from './components/Dashboard/Chat';
+import ConfirmOrder from './pages/ConfirmOrder';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
         <Route path='/allProviders' element={<AllProviders></AllProviders>} />
         <Route path='/provider/details/:sellerId' element={<ProviderDetails></ProviderDetails>} />
         <Route path='/cart' element={<Cart></Cart>} />
+        <Route path='/order/confirm?' element={<ConfirmOrder></ConfirmOrder>} />
         <Route path='/shipping' element={<Shipping></Shipping>} />
         <Route path='/payment' element={<Payments></Payments>} />
 
