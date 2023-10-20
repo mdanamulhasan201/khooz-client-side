@@ -27,6 +27,7 @@ const ProductDetails = () => {
     const { slug } = useParams()
     const dispatch = useDispatch()
     const { product, moreProducts, totalReview } = useSelector(state => state.home)
+    
     const { userInfo } = useSelector(state => state.auth)
     const { errorMessage, successMessage } = useSelector(state => state.cart)
 
@@ -326,7 +327,7 @@ const ProductDetails = () => {
                                 <div className="w-full sm:w-full md:w-[27%] lg:w-[27%] xl:w-[27%]">
                                     <div className='pl-4 sm:pl-0'>
                                         <div className='px-3 py-1 text-slate-600 bg-slate-200 rounded'>
-                                            <h2> From {product.shopName}</h2>
+                                            <h2> From This Shop</h2>
                                         </div>
                                         <div className='flex flex-col items-center gap-5 mt-3 border p-3'>
                                             {
