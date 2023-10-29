@@ -3,17 +3,18 @@ import { Transition } from "@headlessui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiFillHeart, AiFillShopping } from "react-icons/ai";
 import { FaUser } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import logo from '../../src/assets/logo.png'
+import { get_cart_products, get_wishlist_products } from '../store/reducers/cartReducer'
 
 function Navbar() {
 
-
+    const dispatch = useDispatch()
     const { pathname } = useLocation()
     const [isOpen, setIsOpen] = useState(false);
     const [isSticky, setIsSticky] = useState(false);
     const { userInfo } = useSelector(state => state.auth)
-    const { cart_product_count, add_to_wishlist } = useSelector(state => state.cart)
+    const { cart_product_count,  wishlist_count } = useSelector(state => state.cart)
     const navigate = useNavigate()
 
     // const userInfo = 
@@ -44,7 +45,12 @@ function Navbar() {
             navigate(`/login`)
         }
     }
-    const wishlist = 4
+    useEffect(() => {
+        if (userInfo) {
+            dispatch(get_cart_products(userInfo.id))
+            dispatch(get_wishlist_products(userInfo.id))
+        }
+    }, [userInfo])
     return (
         <div >
             <nav className={`fixed w-full px-3 z-10 xs:bg-black bg-[#F8F5FF] ${isSticky ? 'bg-[#F8F5FF] shadow-md' : ''}`}
@@ -93,20 +99,22 @@ function Navbar() {
                         </div>
                         {/* Right-side button */}
 
-                        <div className="flex items-center justify-center  gap-5">
+                        <div className="flex items-center justify-center  gap-1">
                             <div className='flex justify-center gap-5'>
-                                <div className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
-                                    <span className='text-xl text-red-400'><AiFillHeart /></span>
+                                <div onClick={()=>navigate(userInfo ? '/dashboard/wishList' : '/login')} className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
+                                    <span className='text-xl hover:text-red-400'><AiFillHeart /></span>
                                     {
-                                        add_to_wishlist !== 0 &&  <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
-                                        {add_to_wishlist}
-                                    </div>
+                                        wishlist_count !== 0 && <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px]'>
+                                            {wishlist_count}
+                                        </div>
                                     }
-                                   
+
                                 </div>
 
+                                <div className="h-8 w-[1px] bg-gray-400"></div>
+
                                 <div onClick={redirect_cart_page} className='relative flex justify-center items-center cursor-pointer w-[35px] h-[35px] rounded-full bg-[#e2e2e2]'>
-                                    <span className='text-xl text-red-400'><AiFillShopping /></span>
+                                    <span className='text-xl hover:text-red-400'><AiFillShopping /></span>
                                     {
                                         cart_product_count !== 0 && <div className='w-[20px] h-[20px] absolute bg-green-500 rounded-full text-white flex justify-center items-center -top-[3px] -right-[5px] text-sm'>
                                             {
@@ -115,11 +123,11 @@ function Navbar() {
                                         </div>
                                     }
                                 </div>
-
+                                <div className="h-8 w-[1px] bg-gray-400"></div>
                             </div>
 
                             {
-                                userInfo ? <Link className='flex  py-2 px-2 text-gray-700 hover:bg-red-400 hover:text-white cursor-pointer justify-center items-center gap-2 text-sm' to='/dashboard'>
+                                userInfo ? <Link className='flex  py-2 px-2 text-gray-700 hover:text-red-400  cursor-pointer justify-center items-center gap-2 text-sm' to='/dashboard'>
                                     <span className="text-2xl"><FaUser /></span>
                                     <span className="">{userInfo.name}</span>
                                 </Link> : <Link to='/login' className='flex cursor-pointer justify-center items-center gap-2 text-sm'>

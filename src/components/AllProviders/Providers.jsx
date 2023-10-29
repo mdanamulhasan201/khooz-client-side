@@ -16,9 +16,9 @@ const Providers = ({sellers}) => {
                 {sellers
                     .filter((p) => p.status === 'active')
                     .map((p, i) => (
-                        <div key={i} className="card mx-auto  w-[300px] bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
+                        <div key={i} className="card mx-auto  w-72 bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
                             {/* <div className='flex justify-center items-center absolute badge bg-red-500 text-white  font-semibold text-xs right-2 top-2'>Top</div> */}
-                            <img className="h-[280px] w-[300px] " src={p.image} alt="images" />
+                            <img className="h-[240px] w-72 rounded-t-xl " src={p.image} alt="images" />
                             <div className="card-body">
                                 <h2 className="card-title">
                                     {p.name}

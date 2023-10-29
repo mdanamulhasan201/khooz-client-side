@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -10,19 +10,47 @@ import { useSelector } from 'react-redux';
 
 
 const Carousel = () => {
-
+    const [swiper, setSwiper] = useState(null);
     const { categorys } = useSelector(state => state.home)
 
+    useEffect(() => {
+        if (swiper) {
+            const updateSwiperParams = () => {
+                if (window.innerWidth >= 1024) {
+                    swiper.params.slidesPerView = 6; // Large screens
+                } else if (window.innerWidth >= 640) {
+                    swiper.params.slidesPerView = 3; // Medium screens
+                } else {
+                    swiper.params.slidesPerView = 2; // Small screens
+                }
+                swiper.update();
+            };
 
-    const [swiperRef, setSwiperRef] = useState(null);
+            // Initialize swiper with your initial settings
+            swiper.init();
+
+            // Update slidesPerView on window resize
+            window.addEventListener('resize', updateSwiperParams);
+
+            // Initial update
+            updateSwiperParams();
+
+            // Remove event listener when component unmounts
+            return () => {
+                window.removeEventListener('resize', updateSwiperParams);
+            };
+        }
+    }, [swiper]);
+
+
+
+
 
     return (
         <div className="">
             <Swiper
-                onSwiper={setSwiperRef}
-                slidesPerView={6}
-                // centeredSlides={true}
-                spaceBetween={8} // Adjust the spacing here
+                onSwiper={setSwiper}
+                spaceBetween={8}
                 navigation={true}
                 modules={[Navigation, Autoplay]}
                 autoplay={{ delay: 2000 }}

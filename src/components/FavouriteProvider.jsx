@@ -31,7 +31,10 @@ const FavouriteProvider = () => {
         <div className='container mx-auto -mt-20 '>
 
             <div>
-                <h1 className='md:ms-6 font-bold text-left text-2xl mb-5'>Feature Providers</h1>
+                <h1 className='md:ms-8 text-center font-bold md:text-left text-2xl mb-5 md:no-underline underline '>
+                  Feature Providers
+
+                </h1>
 
                 {/* <Search setSearchValue={setSearchValue} searchValue={searchValue}></Search> */}
             </div>
@@ -40,9 +43,9 @@ const FavouriteProvider = () => {
                 {sellers
                     .filter((p) => p.status === 'active')
                     .map((p, i) => (
-                        <div key={i} className="card mx-auto  w-[300px] bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
+                        <div key={i} className="card mx-auto w-72 bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
                             {/* <div className='flex justify-center items-center absolute badge bg-red-500 text-white  font-semibold text-xs right-2 top-2'>Top</div> */}
-                            <img className="h-[280px] w-[300px] " src={p.image} alt="images" />
+                            <img className="h-[240px] w-72 rounded-t-xl " src={p.image} alt="images" />
                             <div className="card-body">
                                 <h2 className="card-title">
                                     {p.name}
@@ -73,13 +76,13 @@ const FavouriteProvider = () => {
             </div>
 
             <div className='flex items-center justify-end mt-5 '>
-                <button className='font-semibold mr-6  text-black hover:text-red-500 flex items-center'>
+                <Link to='/allProviders' className='font-semibold mr-6  text-black hover:text-red-500 flex items-center'>
 
-                    <h1 className='text-xl'> Show More</h1>
+                    <h1 className='text-lg'> All Provider</h1>
                     <div>
                         <BiRightArrowAlt className=' text-2xl'></BiRightArrowAlt>
                     </div>
-                </button>
+                </Link>
 
             </div>
         </div>

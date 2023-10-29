@@ -55,6 +55,9 @@ export const quantity_increment = createAsyncThunk(
     }
   }
 );
+
+
+
 export const quantity_decrement = createAsyncThunk(
   "cart/quantity_decrement",
   async (cartId, { rejectWithValue, fulfillWithValue }) => {
@@ -177,5 +180,5 @@ export const cartReducer = createSlice({
     },
   },
 });
-export const { messageClear } = cartReducer.actions;
+export const { messageClear, reset_count} = cartReducer.actions;
 export default cartReducer.reducer;

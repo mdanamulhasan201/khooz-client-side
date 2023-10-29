@@ -136,7 +136,7 @@ const Provider = () => {
 
 
                                 <div className='py-3 bg-white mb-10 px-3 rounded-md flex flex-col md:flex-row gap-6 justify-between items-center border'>
-                                    <h2 className='text-lg font-semibold  text-slate-600 '>{filteredProviders.length} Products</h2>
+                                    <h2 className='text-lg font-semibold  text-slate-600 '>{filteredProviders.length} Provider</h2>
 
 
 

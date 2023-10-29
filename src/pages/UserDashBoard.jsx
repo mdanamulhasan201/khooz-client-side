@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../Shared/Footer';
 import { FaList } from 'react-icons/fa';
-import { Outlet,NavLink } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import { MdOutlineDashboard, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { BsBookmarkHeart, BsChat } from 'react-icons/bs';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BiLogOutCircle } from 'react-icons/bi';
 
-
 const UserDashBoard = () => {
     const [filterShow, setFilterShow] = useState(false)
+
+    
+
     return (
         <>
             <Navbar></Navbar>
@@ -48,7 +50,7 @@ const UserDashBoard = () => {
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BiLogOutCircle></BiLogOutCircle> </span>
-                                    <div className='block'>Logout</div>
+                                    <button  className='block'>Logout</button>
                                 </li>
                             </ul>
                         </div>
