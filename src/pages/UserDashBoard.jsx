@@ -2,16 +2,33 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../Shared/Footer';
 import { FaList } from 'react-icons/fa';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { MdOutlineDashboard, MdOutlineProductionQuantityLimits } from 'react-icons/md';
+import api from '../api/api'
 import { BsBookmarkHeart, BsChat } from 'react-icons/bs';
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BiLogOutCircle } from 'react-icons/bi';
-
+import { user_reset } from '../store/reducers/authReducer'
+import { reset_count } from '../store/reducers/cartReducer'
+import { useDispatch } from 'react-redux';
 const UserDashBoard = () => {
+
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [filterShow, setFilterShow] = useState(false)
 
-    
+     const logout = async () => {
+        try {
+            const { data } = await api.get('/customer/logout')
+            localStorage.removeItem('customerToken')
+            dispatch(user_reset())
+            dispatch(reset_count())
+            navigate('/login')
+        } catch (error) {
+            console.log(error.response.data)
+        }
+    }
 
     return (
         <>
@@ -48,7 +65,7 @@ const UserDashBoard = () => {
                                     <span className='text-xl'><RiLockPasswordLine></RiLockPasswordLine> </span>
                                     <NavLink to='/dashboard/changePassword' className='block'>Change Password</NavLink>
                                 </li>
-                                <li className='flex justify-start items-center gap-2 py-2'>
+                                <li onClick={logout} className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BiLogOutCircle></BiLogOutCircle> </span>
                                     <button  className='block'>Logout</button>
                                 </li>

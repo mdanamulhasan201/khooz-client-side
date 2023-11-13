@@ -55,7 +55,7 @@ function Navbar() {
         <div >
             <nav className={`fixed w-full px-3 z-10 xs:bg-black bg-[#F8F5FF] ${isSticky ? 'bg-[#F8F5FF] shadow-md' : ''}`}
             >
-                <div className="container mx-auto">
+                <div className="max-w-screen-xl mx-auto">
                     <div className="relative flex items-center justify-between h-16">
                         <div className="flex items-center">
                             <div className="flex-shrink-0">
