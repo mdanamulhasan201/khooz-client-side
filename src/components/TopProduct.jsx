@@ -78,7 +78,7 @@ const TopProduct = ({ products }) => {
 
                             <img className='h-[240px] w-64 rounded-t-lg' src={p.images[1]} alt="Refrigerator Compressor Spare Part" />
 
-                            <ul className='flex justify-center items-center text-xl text-green-500 gap-2  w-full '>
+                            <ul className='flex justify-center items-center text-xl text-black gap-2  w-full '>
 
                                 <li onClick={() => add_wishlist(p)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
 

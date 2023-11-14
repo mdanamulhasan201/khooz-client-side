@@ -15,7 +15,7 @@ const ProviderDetails = () => {
     const { sellerId } = useParams()
     const { seller } = useSelector(state => state.provider)
 
-    const { totalReviews} = useSelector(state => state.home)
+    const { totalReviews } = useSelector(state => state.home)
 
     useEffect(() => {
         dispatch(get_provider_details(sellerId))
@@ -24,7 +24,7 @@ const ProviderDetails = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className='container mx-auto py-20'>
+            <div className='max-w-screen-xl mx-auto py-20'>
                 <div className='mx-2 md:mx-0'>
                     <section className='flex items-center justify-center text-2xl  h-full w-full gap-2'>
                         <Link to='/' className='hover:text-red-400'>Home</Link>
@@ -39,19 +39,19 @@ const ProviderDetails = () => {
                             <span className='pt-1'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>
                             <Link to='/' className='hover:text-red-400'>{seller?.shopInfo?.category}</Link>
                             <span className='pt-1'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>
-                            <h1>{seller?._id}</h1>
+                            <h1 className='text-green-500'>{seller?._id}</h1>
                         </div>
 
                     </section>
 
 
-                    <div className='flex flex-col md:flex-row gap-5 text-center md:text-left  my-10 leading-10'>
+                    <div className='w-full flex flex-col md:flex-row justify-between text-center md:text-left  my-10 leading-10'>
 
-                        <div className='flex justify-center md:w-4/12 '>
+                        <div className='flex justify-center w-full md:w-4/12 max-auto'>
                             <img className='w-[350px] h-[400px] border mr-2 mb-2' src={seller.image} alt="" />
                         </div>
 
-                        <div className='text-gray-600 md:w-8/12 leading-8'>
+                        <div className='text-gray-600 w-full md:w-8/12 mx-auto leading-8'>
                             <div className='mb-4'>
                                 <h2 className='text-2xl font-semibold text-gray-600'>{seller.name} </h2>
                                 <span className='text-green-500'>{seller?.shopInfo?.category}</span>
@@ -82,11 +82,12 @@ const ProviderDetails = () => {
 
                         </div>
                     </div>
+                    <ProviderReview seller={seller}></ProviderReview>
                 </div>
 
 
 
-                <ProviderReview seller={seller}></ProviderReview>
+
             </div>
             <Footer></Footer>
         </div>

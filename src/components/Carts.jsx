@@ -55,7 +55,7 @@ const Carts = () => {
 
     return (
         <div className='py-20'>
-            <div className='container mx-auto'>
+            <div className='max-w-screen-xl mx-auto'>
                 <section className='flex items-center justify-center text-2xl  h-full w-full gap-2'>
                     <Link to='/' className='hover:text-red-500'>Home</Link>
                     <span className='pt-2'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>

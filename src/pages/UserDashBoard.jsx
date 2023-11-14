@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../Shared/Footer';
 import { FaList } from 'react-icons/fa';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate, Link, useLocation } from 'react-router-dom';
 import { MdOutlineDashboard, MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import api from '../api/api'
 import { BsBookmarkHeart, BsChat } from 'react-icons/bs';
@@ -17,8 +17,9 @@ const UserDashBoard = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const [filterShow, setFilterShow] = useState(false)
+    const { pathname } = useLocation()
 
-     const logout = async () => {
+    const logout = async () => {
         try {
             const { data } = await api.get('/customer/logout')
             localStorage.removeItem('customerToken')
@@ -33,7 +34,7 @@ const UserDashBoard = () => {
     return (
         <>
             <Navbar></Navbar>
-            <div className='container mx-auto py-20'>
+            <div className='max-w-screen-xl mx-auto py-20'>
                 <div className='w-[90%] md:w-full mx-auto pt-5 block md:hidden lg:hidden'>
                     <div>
                         <button onClick={() => setFilterShow(!filterShow)} className='text-center py-3 px-3 bg-indigo-500 text-white'>
@@ -47,7 +48,7 @@ const UserDashBoard = () => {
                             <ul className='py-2 text-slate-600 px-4'>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><MdOutlineDashboard></MdOutlineDashboard> </span>
-                                    <NavLink to='/dashboard' className='block'>Dashboard</NavLink>
+                                    <Link to='/dashboard' className={`py-2 px-3 ${pathname === '/dashboard' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>Dashboard</Link>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><MdOutlineProductionQuantityLimits></MdOutlineProductionQuantityLimits> </span>
@@ -67,7 +68,7 @@ const UserDashBoard = () => {
                                 </li>
                                 <li onClick={logout} className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BiLogOutCircle></BiLogOutCircle> </span>
-                                    <button  className='block'>Logout</button>
+                                    <button className='block'>Logout</button>
                                 </li>
                             </ul>
                         </div>

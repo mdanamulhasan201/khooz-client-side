@@ -22,10 +22,10 @@ const WishList = () => {
         }
     }, [successMessage])
     return (
-        <div className=' p-4'>
+        <div className='p-4'>
             <div className='w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-6 ' >
                 {
-                    wishlist.map((p, i) => <div key={i} className='border  w-72  group transition-all duration-500 hover:shadow-md hover:-mt-3'>
+                    wishlist.map((p, i) => <div key={i} className='border  w-64  group transition-all duration-500 hover:shadow-md hover:-mt-3'>
                         <div className='relative overflow-hidden'>
 
                             {
@@ -33,10 +33,10 @@ const WishList = () => {
                             }
 
 
-                            <img className='h-[240px] w-72' src={p.image} alt="Refrigerator Compressor Spare Part" />
+                            <img className='h-[240px] w-64' src={p.image} alt="Refrigerator Compressor Spare Part" />
 
                             <ul className='flex text-xl text-green-500 justify-center items-center gap-2  w-full group-hover:bottom-3'>
-                                <li onClick={() => dispatch(remove_wishlist(p._id))} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
+                                <li onClick={() => dispatch(remove_wishlist(p._id))} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full text-red-400 hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
 
                                 <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all' ><FaEye /></Link>
 

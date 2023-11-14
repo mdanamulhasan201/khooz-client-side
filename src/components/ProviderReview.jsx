@@ -78,23 +78,30 @@ const ProviderReview = ({ seller }) => {
     };
 
     return (
-        <div className='mt-14   mx-2 md:mx-0'>
+        <div className='mt-14 mx-2 md:mx-0'>
 
             <div className='flex flex-col-reverse md:flex-row gap-10 md:mx-0 mx-2 '>
                 <div className='flex flex-col lg:w-6/12 md:w-full w-full justify-center '>
-                    <h2 className="text-slate-600 text-xl font-bold py-5">Total Reviews {totalReviews}</h2>
+                    <h2 className="text-slate-600 text-lg text-center font-bold py-5">Total Reviews {totalReviews}</h2>
+
+
                     <div className="flex flex-col gap-8 pb-10 pt-4">
                         {currentReviews.map((review, i) => (
-                            <div key={i} className="flex flex-col gap-1">
-                                <div className="flex justify-between items-center">
-                                    <span className="text-slate-600 text-md ">{review.name}</span>
 
+                            <div key={i} className="flex justify-between items-center gap-1">
+                                <div>
+                                    <span className="text-slate-600 text-lg font-semibold ">{review.name}</span>
+                                    <div className='flex my-2'>
+                                        <RatingTemp rating={review.rating}></RatingTemp>
+                                    </div>
+                                    <p className="text-slate-500 text-sm  ">{review.review}</p>
+                                </div>
+
+
+                                <div >
                                     <span className="text-slate-600">{review.date}</span>
                                 </div>
-                                <div className="flex gap-1 text-xl">
-                                    <RatingTemp rating={review.rating}></RatingTemp>
-                                </div>
-                                <p className="text-slate-600 text-sm ">{review.review}</p>
+
                             </div>
                         ))}
                     </div>
@@ -159,9 +166,9 @@ const ProviderReview = ({ seller }) => {
 
                 <div className='lg:w-6/12 md:w-full w-full'>
 
-                    <div className=' h-full'>
-                        <h2 className='mt-2 ms-5 flex flex-col font-semibold text-xl'> About </h2>
-                        <span className='text-[18px] ms-5'>{seller?.shopInfo?.about} </span>
+                    <div className=''>
+                        <h2 className='mb-5 text-center text-slate-600  font-semibold text-xl'> About </h2>
+                        <span className='text-[18px] '>{seller?.shopInfo?.about} </span>
                     </div>
                 </div>
 

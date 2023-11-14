@@ -146,7 +146,7 @@ const Product = () => {
 
                                     <div className='flex'>
                                         <input onChange={(e) => setSearchValue(e.target.value)} className='w-full rounded-s-md border py-2  relative bg-transparent text-stone-500 outline-0 px-3 h-full ' type="text" name="" id="" placeholder="Find your Product" required />
-                                        <button onClick={search} className='outline-none rounded-r-md bg-green-500 text-white hover:bg-green-400  px-6  font-semibold '>Search</button>
+                                        <button onClick={search} className='outline-none rounded-r-md bg-green-500 text-white hover:bg-green-400  px-3  font-semibold '>Search</button>
                                     </div>
 
 
