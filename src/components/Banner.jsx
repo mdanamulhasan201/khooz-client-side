@@ -55,8 +55,8 @@ const Banner = () => {
                         excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
                         a id nisi.
                     </p>
-                    <div className=" my-4">
-                        <button className="border transform hover:scale-105 transition-transform duration-300 font-semibold py-2 px-2 rounded-md bg-green-500 text-white">Become a provider or seller</button>
+                    <div className=" my-4 md:my-7">
+                        <a href="http://localhost:3000/login" target="_blank" className="border transform hover:scale-105 transition-transform duration-300 font-semibold py-2 px-2 rounded-md bg-green-500 text-white">Become a provider or seller</a>
                     </div>
 
                     <SearchBar></SearchBar>
