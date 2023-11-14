@@ -19,11 +19,13 @@ const Home = () => {
     }, [])
 
     return (
-        <div>
+        <div >
             <Navbar></Navbar>
             <Banner></Banner>
             <Carousel></Carousel>
-            <FavouriteProvider ></FavouriteProvider>
+            <div className='max-w-screen-xl mx-auto'>
+                <FavouriteProvider ></FavouriteProvider>
+            </div>
             <Swipers></Swipers>
             <TopProduct products={products}></TopProduct>
             <Footer></Footer>

@@ -60,19 +60,19 @@ const Product = () => {
         navigate(`/products/search?category=${category}&&value=${searchValue}`)
     }
     return (
-        <div className='py-20'>
-            <div className='container mx-auto'>
+        <div className='py-20 '>
+            <div className='max-w-screen-xl mx-auto'>
                 <section className='flex items-center justify-center text-2xl  h-full w-full gap-2'>
                     <Link to='/' className='hover:text-red-500'>Home</Link>
                     <span className='pt-2'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>
-                    <span>Products</span>
+                    <span className='text-green-500'>Products</span>
                 </section>
 
-                <section className='py-16'>
+                <section className='py-8'>
 
                     <div className='w-full flex flex-wrap'>
                         <div className='md:w-2/12 w-full ps-2'>
-                            <h2 className='text-3xl font-bold mb-3 text-slate-600 '>Category</h2>
+                            <h2 className='text-2xl font-bold mb-3 text-slate-600 '>Category</h2>
                             <div className='py-2'>
                                 {
                                     categorys.map((c, i) => (
@@ -87,7 +87,7 @@ const Product = () => {
 
                             </div>
                             <div className='py-2 md:px-0 px-2 flex flex-col gap-5'>
-                                <h2 className='text-3xl font-bold mb-3 text-slate-600'>Price</h2>
+                                <h2 className='text-2xl font-bold mb-3 text-slate-600'>Price</h2>
                                 <Range
                                     step={5}
                                     min={priceRange.low}
@@ -137,14 +137,16 @@ const Product = () => {
 
 
                         <div className='w-10/12'>
-                            <div className='pl-8 '>
-                                <div className='py-3 bg-white mb-10 px-3 rounded-md flex flex-col md:flex-row gap-6 justify-between items-center border'>
-                                    <h2 className='text-lg font-semibold  text-slate-600 '>{totalProduct} Products</h2>
+                            <div className='pl-10 '>
+                                <div className='py-2 bg-white mb-5 px-2 rounded-md flex flex-col md:flex-row gap-6 justify-between items-center border'>
+
+
+
 
 
                                     <div className='flex'>
-                                        <input onChange={(e) => setSearchValue(e.target.value)} className='w-full border py-2  relative bg-transparent text-stone-500 outline-0 px-3 h-full ' type="text" name="" id=""  placeholder="Find your Product" required />
-                                        <button onClick={search} className='outline-none bg-red-400 text-white hover:bg-red-500  px-6  font-semibold uppercase'>Search</button>
+                                        <input onChange={(e) => setSearchValue(e.target.value)} className='w-full rounded-s-md border py-2  relative bg-transparent text-stone-500 outline-0 px-3 h-full ' type="text" name="" id="" placeholder="Find your Product" required />
+                                        <button onClick={search} className='outline-none rounded-r-md bg-green-500 text-white hover:bg-green-400  px-6  font-semibold '>Search</button>
                                     </div>
 
 

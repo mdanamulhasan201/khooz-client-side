@@ -19,7 +19,7 @@ const Swipers = () => {
     }, []);
 
     return (
-        <div className='my-32 mx-auto h-48 container bg-slate-300 relative'>
+        <div className='my-32 mx-auto h-48 max-w-screen-xl bg-slate-300 relative'>
             {images.map((image, index) => (
                 <div
                     key={index}

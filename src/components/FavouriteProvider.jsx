@@ -4,7 +4,7 @@ import Rating from "../Shared/Rating";
 import { useDispatch, useSelector } from "react-redux";
 import { get_provider_request, get_provider_details } from "../store/reducers/providerReducer";
 import { useEffect, useState } from "react";
-
+import './topProduct.css'
 const FavouriteProvider = () => {
 
 
@@ -27,25 +27,25 @@ const FavouriteProvider = () => {
         dispatch(get_provider_details(sellerId))
 
     }, [sellerId])
+
+    const fiveStarSellers = sellers
+        .filter(p => p.status === 'active' && p.rating === 5)
+        .slice(0, 8);
     return (
-        <div className='container mx-auto -mt-20 '>
+        <div className=' mt-0 md:-mt-5 lg:-mt-16'>
 
-            <div>
-                <h1 className='md:ms-8 text-center font-bold md:text-left text-2xl mb-5 md:no-underline underline '>
-                  Feature Providers
+            <div className="grid justify-center">
+                <span className=' text-center font-bold  text-2xl mb-8 underLine'>Top Provider</span>
 
-                </h1>
-
-                {/* <Search setSearchValue={setSearchValue} searchValue={searchValue}></Search> */}
             </div>
 
-            <div className='w-full grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-                {sellers
+            <div className='w-full grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
+                {fiveStarSellers
                     .filter((p) => p.status === 'active')
                     .map((p, i) => (
-                        <div key={i} className="card mx-auto w-72 bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
+                        <div key={i} className="card mx-auto w-64 bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
                             {/* <div className='flex justify-center items-center absolute badge bg-red-500 text-white  font-semibold text-xs right-2 top-2'>Top</div> */}
-                            <img className="h-[240px] w-72 rounded-t-xl " src={p.image} alt="images" />
+                            <img className="h-[240px] w-64 rounded-t-xl " src={p.image} alt="images" />
                             <div className="card-body">
                                 <h2 className="card-title">
                                     {p.name}

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { add_to_cart, messageClear, add_to_wishlist } from "../store/reducers/cartReducer";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-
+import './topProduct.css'
 
 
 const TopProduct = ({ products }) => {
@@ -59,23 +59,24 @@ const TopProduct = ({ products }) => {
 
 
     return (
-        <div className='container mx-auto  mb-20'>
+        <div className='max-w-screen-xl mx-auto  mb-20'>
 
-            <div>
-                 <h1 className=' text-center font-bold md:text-left text-2xl mb-5 md:no-underline underline '>Feature Products</h1>
+            <div className="grid justify-center">
+                <span className=' text-center font-bold  text-2xl mb-8 underLine'>Top Products</span>
+
             </div>
 
             <div className='w-full  grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center items-center'>
 
                 {
-                    products.map((p, i) => <div key={i} className='border rounded-lg w-72 transition-all duration-500 hover:shadow-md hover:-mt-3'>
+                    products.map((p, i) => <div key={i} className='border rounded-lg w-64 transition-all duration-500 hover:shadow-md hover:-mt-3'>
                         <div className='relative overflow-hidden'>
 
                             {
                                 p.discount ? <div className='flex justify-center items-center absolute badge bg-green-500 text-white  font-semibold text-xs right-2 top-2'>{p.discount}%</div> : ''
                             }
 
-                            <img className='h-[240px] w-72 rounded-t-lg' src={p.images[1]} alt="Refrigerator Compressor Spare Part" />
+                            <img className='h-[240px] w-64 rounded-t-lg' src={p.images[1]} alt="Refrigerator Compressor Spare Part" />
 
                             <ul className='flex justify-center items-center text-xl text-green-500 gap-2  w-full '>
 
@@ -100,7 +101,7 @@ const TopProduct = ({ products }) => {
 
             </div>
             <div className='flex items-center justify-end mt-5 '>
-                <Link to='/allProducts'  className='font-semibold mr-6  text-black hover:text-red-500 flex items-center'>
+                <Link to='/allProducts' className='font-semibold mr-6  text-black hover:text-red-500 flex items-center'>
 
                     <h1 className='text-lg'>All Products</h1>
                     <div>

@@ -76,7 +76,7 @@ const Reviews = ({ product }) => {
     };
     return (
         <div className="mt-8">
-            <div className="flex gap-10 ">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-10 ">
                 <div className="flex flex-col gap-2 justify-start items-center py-4 ">
                     <div>
                         <span className="text-6xl font-semibold">{product.rating}</span>

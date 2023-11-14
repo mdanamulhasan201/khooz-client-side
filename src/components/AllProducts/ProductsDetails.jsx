@@ -27,7 +27,7 @@ const ProductDetails = () => {
     const { slug } = useParams()
     const dispatch = useDispatch()
     const { product, moreProducts, totalReview } = useSelector(state => state.home)
-    
+
     const { userInfo } = useSelector(state => state.auth)
     const { errorMessage, successMessage } = useSelector(state => state.cart)
 
@@ -168,14 +168,21 @@ const ProductDetails = () => {
         })
     }
 
-
+    const handleZoom = (e) => {
+        const zoomer = e.currentTarget;
+        const offsetX = e.nativeEvent.offsetX || e.touches[0].pageX;
+        const offsetY = e.nativeEvent.offsetY || e.touches[0].pageY;
+        const x = (offsetX / zoomer.offsetWidth) * 100;
+        const y = (offsetY / zoomer.offsetHeight) * 100;
+        zoomer.style.backgroundPosition = `${x}% ${y}%`;
+    };
 
 
     return (
         <>
             <Navbar></Navbar>
-            <div className='py-20'>
-                <div className="container mx-auto ">
+            <div className='py-20  md:px-0 px-5'>
+                <div className="max-w-screen-xl mx-auto">
                     <section className='flex items-center justify-center text-2xl  h-full w-full gap-2'>
                         <Link to='/' className='hover:text-red-400'>Home</Link>
                         <span className='pt-2'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>
@@ -188,18 +195,31 @@ const ProductDetails = () => {
                             <span className='pt-1'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>
                             <Link to='/' className='hover:text-red-400'>{product.category}</Link>
                             <span className='pt-1'><MdOutlineKeyboardArrowRight></MdOutlineKeyboardArrowRight></span>
-                            <span>{product.name}</span>
+                            <span className="text-green-500">{product.name}</span>
                         </div>
 
                     </section>
 
-                    <section className="">
+                    <section >
                         <div className="pb-16">
-                            <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                                <div>
-                                    <div className="p-5 border ">
-                                        <img className="w-full h-[350px] " src={image ? image : product.images?.[1]} alt="" />
-
+                            <div className="flex flex-col md:flex-row ">
+                                <div className="md:w-6/12 w-full  mx-auto">
+                                    <div className="p-2 border md:w-[500px]">
+                                        <figure
+                                            className="zoom relative w-full h-[350px] overflow-hidden cursor-zoom-in"
+                                            onMouseMove={handleZoom}
+                                            onTouchMove={handleZoom}
+                                            style={{
+                                                backgroundImage: `url(${image || product.images?.[1]})`,
+                                                backgroundPosition: '50% 50%',
+                                            }}
+                                        >
+                                            <img
+                                                src={image || product.images?.[1]}
+                                                alt=""
+                                                className="transition-opacity duration-500 hover:opacity-0 block w-full h-full object-cover"
+                                            />
+                                        </figure>
                                     </div>
                                     <div className="py-3 ">
                                         {
@@ -213,7 +233,7 @@ const ProductDetails = () => {
                                                 {
                                                     product.images.map((img, i) => {
                                                         return (
-                                                            <div key={i} className="pr-2 border cursor-pointer" onClick={() => setImage(img)}>
+                                                            <div key={i} className="pr-2 flex justify-between cursor-pointer" onClick={() => setImage(img)}>
                                                                 <img className="w-full h-[80px] hover:shadow-2xl hover:border-gray-950 hover:border" src={img} alt="" />
                                                             </div>
                                                         )
@@ -225,7 +245,10 @@ const ProductDetails = () => {
 
                                     </div>
                                 </div>
-                                <div className="flex flex-col gap-5">
+
+
+
+                                <div className="flex flex-col gap-5 md:w-6/12 w-full mx-auto">
                                     <div className="text-3xl text-slate-600 font-bold">
                                         <h2>{product.name}</h2>
                                     </div>
@@ -257,26 +280,35 @@ const ProductDetails = () => {
                                             : 'No description available'}
                                     </p>
 
-                                    <div className="flex gap-3 pb-3 border-b">
+
+
+                                    <div className="flex items-center text-xl rounded-md">
+                                        <p className="mr-10 text-gray-500">Quantity:</p>
+                                        <div onClick={decrement} className='px-2 border bg-red-50 cursor-pointer '>
+                                            <FiMinus className="text-red-400 "></FiMinus>
+                                        </div>
+                                        <div className="px-6 ">{quantity}</div>
+                                        <div onClick={increment} className='px-2 bg-green-50 border cursor-pointer'>
+                                            <FiPlus className="text-green-500 "></FiPlus>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div className="flex items-center gap-5 pb-3 border-b">
                                         {
                                             product.stock ? <>
-                                                <div className="flex bg-slate-200 h-[50px] justify-center items-center text-xl rounded-md">
-                                                    <div onClick={decrement} className='px-3 cursor-pointer '>
-                                                        <FiMinus className="text-red-400"></FiMinus>
-                                                    </div>
-                                                    <div className="px-6 ">{quantity}</div>
-                                                    <div onClick={increment} className='px-3 cursor-pointer'>
-                                                        <FiPlus className="text-green-500"></FiPlus>
-                                                    </div>
-                                                </div>
+                                                {
+                                                    product.stock ? <button onClick={buy} className='px-3 py-2 rounded-md cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white'>Buy Now</button> : ""
+                                                }
                                                 <div>
-                                                    <button onClick={add_cart} className="px-10 rounded-md py-3 h-[50px] w-[170px] cursor-pointer hover:shadow-lg hover:shadow-blue-500/40 bg-green-500 text-white"> Add to Cart</button>
+                                                    <button onClick={add_cart} className="px-3 rounded-md py-2 whitespace-nowrap cursor-pointer hover:shadow-lg hover:shadow-blue-500/40 bg-green-500 text-white"> Add to Cart</button>
                                                 </div>
                                             </> : ''
                                         }
 
                                         <div>
-                                            <div onClick={add_wishlist} className="h-[50px] w-[40px] flex justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white rounded-md">
+                                            <div onClick={add_wishlist} className=" flex px-3 py-2 justify-center items-center cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white rounded-md">
                                                 <span className="text-lg">
                                                     <AiFillHeart></AiFillHeart>
                                                 </span>
@@ -284,8 +316,11 @@ const ProductDetails = () => {
                                         </div>
 
                                     </div>
+
+
+
                                     <div className='flex py-5 gap-5'>
-                                        <div className='w-[150px] text-black font-bold text-xl flex flex-col gap-5 '>
+                                        <div className='w-[150px] text-gray-500 font-bold text-xl flex flex-col gap-5 '>
                                             <span>Availability</span>
 
                                         </div>
@@ -295,12 +330,10 @@ const ProductDetails = () => {
                                             </span>
                                         </div>
                                     </div>
-                                    <div className='flex gap-3'>
-                                        {
-                                            product.stock ? <button onClick={buy} className='px-8 py-3 rounded-md h-[50px] cursor-pointer hover:shadow-lg hover:shadow-red-400/40 bg-red-400 text-white'>Buy Now</button> : ""
-                                        }
+                                    {/* <div className='flex gap-3'>
+
                                         <Link to={`/dashboard/chat/${product.sellerId}`} className='px-8 rounded-md py-3 h-[50px] cursor-pointer hover:shadow-lg hover:shadow-green-500/40 bg-green-500 text-white block'>Chat Seller</Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
 

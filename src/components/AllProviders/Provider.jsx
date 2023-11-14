@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get_provider_details, get_provider_request } from '../../store/reducers/providerReducer';
 import { RiErrorWarningLine } from "react-icons/ri";
 
+
 const Provider = () => {
     const dispatch = useDispatch();
     const [searchValue, setSearchValue] = useState('');
@@ -16,7 +17,7 @@ const Provider = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [filteredProviders, setFilteredProviders] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(10);
+    const [itemsPerPage] = useState(3);
 
 
     useEffect(() => {
@@ -96,9 +97,10 @@ const Provider = () => {
         setCurrentPage(pageNumber);
     };
 
+
     return (
         <div className="py-20">
-            <div className="container mx-auto">
+            <div className="max-w-screen-xl mx-auto">
                 <section className="flex items-center justify-center text-2xl h-full w-full gap-2">
                     <Link to="/" className="hover:text-red-500">
                         Home
@@ -109,10 +111,10 @@ const Provider = () => {
                     <span>Providers</span>
                 </section>
 
-                <section className="py-16">
-                    <div className="w-full flex flex-wrap">
-                        <div className="md:w-2/12 w-full ps-2">
-                            <h2 className="text-3xl font-bold mb-3 text-slate-600">Category</h2>
+                <section className="pt-7">
+                    <div className="w-full  flex  flex-wrap">
+                        <div className="md:w-2/12 md:pt-28 lg:sticky lg:top-20 w-full ps-2">
+                            <h2 className="text-2xl font-bold mb-3 text-slate-600">Category</h2>
                             <div className="py-2">
                                 {categorys.map((c, i) => (
                                     <div className="flex justify-start items-center gap-2 py-1" key={i}>
@@ -131,12 +133,12 @@ const Provider = () => {
 
                         </div>
 
-                        <div className="w-10/12">
-                            <div className="pl-8">
+                        <div className="w-10/12  mx-auto">
+                            <div className="">
 
 
-                                <div className='py-3 bg-white mb-10 px-3 rounded-md flex flex-col md:flex-row gap-6 justify-between items-center border'>
-                                    <h2 className='text-lg font-semibold  text-slate-600 '>{filteredProviders.length} Provider</h2>
+                                <div className='py-3 w-full mx-auto bg-white mb-5 px-3 rounded-md flex flex-col md:flex-row gap-6 justify-between items-center border'>
+
 
 
 
@@ -147,7 +149,7 @@ const Provider = () => {
                                     </div>
                                     <div className='flex'>
                                         <input
-                                            className='w-full border py-2 relative bg-transparent text-stone-500 outline-0 px-3 h-full'
+                                            className='w-full border rounded-s-md py-2 relative bg-transparent text-stone-500 outline-0 px-3 h-full'
                                             type="text"
                                             name=""
                                             id=""
@@ -156,16 +158,8 @@ const Provider = () => {
                                             value={searchQuery}
                                             onChange={(e) => setSearchQuery(e.target.value)}
                                         />
-                                        <button className='outline-none bg-red-400 text-white hover:bg-red-500  px-6  font-semibold uppercase'>Search</button>
+                                        <button className='outline-none bg-green-500 text-white hover:bg-green-400  rounded-r-md  px-3  font-semibold '>Search</button>
                                     </div>
-
-
-                                    {/* <select className='p-1 border outline-0 text-slate-600 font-semibold' name='' id=''>
-                                        <option value="">Sort By</option>
-                                        <option value="low-high">Low to High</option>
-                                        <option value="high-low">High to Low </option>
-                                    </select> */}
-
 
                                 </div>
                                 <div className="pb-8">
@@ -178,7 +172,7 @@ const Provider = () => {
                                             <li
                                                 key={page}
                                                 onClick={() => handlePageChange(page + 1)}
-                                                className={`cursor-pointer px-2 py-1 rounded-full ${currentPage === page + 1 ? 'bg-red-500 text-white' : 'bg-gray-200'
+                                                className={`cursor-pointer px-2 py-1 rounded-full ${currentPage === page + 1 ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-700'
                                                     }`}
                                             >
                                                 {page + 1}
@@ -186,6 +180,7 @@ const Provider = () => {
                                         ))}
                                     </ul>
                                 </div>
+
                             </div>
                         </div>
                     </div>

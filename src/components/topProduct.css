@@ -1,0 +1,6 @@
+.underLine {
+    background: linear-gradient(0deg, rgba(255,0,255,0) 0%, rgba(255,0,255,0) 16%, rgb(0, 255, 115) 16%, rgb(2, 251, 139) 41%, rgba(255,0,255,0) 41%);
+  background-position: bottom;
+  background-size: 100% 70%;
+  background-repeat: no-repeat;
+}
