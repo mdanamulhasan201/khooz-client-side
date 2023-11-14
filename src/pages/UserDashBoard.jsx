@@ -48,27 +48,28 @@ const UserDashBoard = () => {
                             <ul className='py-2 text-slate-600 px-4'>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><MdOutlineDashboard></MdOutlineDashboard> </span>
-                                    <Link to='/dashboard' className={`py-2 px-3 ${pathname === '/dashboard' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>Dashboard</Link>
+
+                                    <Link to='/dashboard' className={` ${pathname === '/dashboard' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>Dashboard</Link>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><MdOutlineProductionQuantityLimits></MdOutlineProductionQuantityLimits> </span>
-                                    <NavLink to='/dashboard/myOrders' className='block'>My Orders</NavLink>
+                                    <Link to='/dashboard/myOrders' className={` ${pathname === '/dashboard/myOrders' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>My Orders</Link>
                                 </li>
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BsBookmarkHeart></BsBookmarkHeart> </span>
-                                    <NavLink to='/dashboard/wishList' className='block'>Wishlist</NavLink>
+                                    <Link to='/dashboard/wishList' className={` ${pathname === '/dashboard/wishList' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>Wishlist</Link>
                                 </li>
-                                <li className='flex justify-start items-center gap-2 py-2'>
+                                {/* <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BsChat></BsChat> </span>
-                                    <NavLink to='/dashboard/chat' className='block'>Chat</NavLink>
-                                </li>
+                                    <Link to='/dashboard/chat' className={` ${pathname === '/dashboard/chat' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>Chat</Link>
+                                </li> */}
                                 <li className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><RiLockPasswordLine></RiLockPasswordLine> </span>
-                                    <NavLink to='/dashboard/changePassword' className='block'>Change Password</NavLink>
+                                    <Link to='/dashboard/changePassword' className={` ${pathname === '/dashboard/changePassword' ? 'text-red-400 text-md font-medium hover:text-black' : 'text-black hover:text-red-400 text-md font-medium'}`}>Change Password</Link>
                                 </li>
                                 <li onClick={logout} className='flex justify-start items-center gap-2 py-2'>
                                     <span className='text-xl'><BiLogOutCircle></BiLogOutCircle> </span>
-                                    <button className='block'>Logout</button>
+                                    <button className='text-black hover:text-red-400 text-md font-medium'>Logout</button>
                                 </li>
                             </ul>
                         </div>
