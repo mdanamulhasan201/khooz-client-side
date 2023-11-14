@@ -123,7 +123,7 @@ const Shipping = () => {
                                                         <span className="text-slate-600 text-sm">{info.address} {info.region} {info.city} {info.area} ({info.post}) </span>
                                                         <span onClick={() => setRes(false)} className="text-indigo-500 cursor-pointer ms-2">Change </span>
                                                     </p>
-                                                    <p className="text-slate-600 text-sm">Email to costumers@gamil.com</p>
+                                                    <p className="text-slate-600 text-sm">Email to {userInfo.email}</p>
 
                                                 </div>
                                             }

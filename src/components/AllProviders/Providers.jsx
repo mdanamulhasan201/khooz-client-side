@@ -43,15 +43,13 @@ const Providers = ({ sellers }) => {
                                         <Rating ratings={p.rating} />
                                     </div>
                                     <div>
+                                       
                                         <Link to={`/provider/details/${p._id}`}>
-                                            <button className='text-md flex items-center justify-center border border-gray-600 outline-none hover:border-white rounded-full  hover:bg-red-400 hover:text-white px-1 ' style={{
-                                                transition: 'background-color 0.3s ease, color 0.3s ease' // Set the easing time here (0.3s in this example)
-                                            }}>
-                                                <span>Details</span>
-                                                <MdOutlineKeyboardArrowRight className="text-lg" />
+                                            <button className='flex justify-center items-center text-md badge transform duration-500 hover:bg-red-400 hover:text-white hover:border-red-400 badge-outline'>
+                                               <span> Details</span> <MdOutlineKeyboardArrowRight className="text-lg" />
                                             </button>
+                                            
                                         </Link>
-
                                     </div>
                                 </div>
                             </div>

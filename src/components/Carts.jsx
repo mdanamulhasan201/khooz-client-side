@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import { get_cart_products, delete_cart_product, messageClear, quantity_increment, quantity_decrement } from "../store/reducers/cartReducer";
 import toast from "react-hot-toast";
-import { FiMinus, FiPlus} from "react-icons/fi";
+import { FiMinus, FiPlus } from "react-icons/fi";
 
 
 const Carts = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { userInfo } = useSelector(state => state.auth)
-    const { cart_products,  price, outofstock_products, buy_product_item, delivery_cost, successMessage, errorMessage, } = useSelector(state => state.cart)
+    const { cart_products, price, outofstock_products, buy_product_item, delivery_cost, successMessage, errorMessage, } = useSelector(state => state.cart)
 
 
     const redirect = () => {
@@ -75,12 +75,12 @@ const Carts = () => {
                                             {
                                                 cart_products.map((p, i) => <div key={i} className='flex bg-gray-100 p-4 flex-col gap-2'>
                                                     <div className=' flex justify-start items-center'>
-                                                        <h2 className='text-md text-slate-600'>{p.shopName}</h2>
+                                                        {/* <h2 className='text-md text-slate-600'>{p.shopName}</h2> */}
                                                     </div>
                                                     {
-                                                        p.products.map((product, i) => <div key={i}className='w-full justify-center items-center flex md:flex-row flex-col'>
-                                                            <div className='flex  gap-2 w-7/12'>
-                                                                <div  className='flex gap-2 justify-start items-center md:border-none border'>
+                                                        p.products.map((product, i) => <div key={i} className='w-full justify-center items-center flex md:flex-row flex-col'>
+                                                            <div className='flex md:justify-start justify-center  gap-2 w-7/12'>
+                                                                <div className='flex gap-2 justify-start items-center md:border-none border'>
 
                                                                     <img className='w-[80px] h-[80px]' src={product.productInfo.images[1]} alt="Product" />
 
@@ -157,11 +157,11 @@ const Carts = () => {
                                                                     </div>
                                                                     <div className='flex gap-2 flex-col'>
                                                                         <div className='flex bg-slate-200 h-[30px] justify-center items-center text-xl '>
-                                                                        <div onClick={() => decrement(p.quantity, p._id)} className='px-3 cursor-pointer '>
-                                                                            <FiMinus className="text-red-400"></FiMinus>
-                                                                        </div>
+                                                                            <div onClick={() => decrement(p.quantity, p._id)} className='px-3 cursor-pointer '>
+                                                                                <FiMinus className="text-red-400"></FiMinus>
+                                                                            </div>
                                                                             <div className='px-3'>{p.quantity}</div>
-                                                                            <div onClick={() => increment(p.quantity, p.products[0].stock, p._id)}  className='px-3 cursor-pointer'>+</div>
+                                                                            <div onClick={() => increment(p.quantity, p.products[0].stock, p._id)} className='px-3 cursor-pointer'>+</div>
                                                                         </div>
                                                                         <button onClick={() => dispatch(delete_cart_product(p._id))} className='px-5 py-[3px] bg-red-400 text-white'>Delete</button>
                                                                     </div>
@@ -210,7 +210,7 @@ const Carts = () => {
                                     </div>
                                 </div>
 
-                            </div> : <div>
+                            </div> : <div className="flex justify-center items-center">
                                 <Link className='px-4 py-1 bg-red-400 text-white' to='/allProducts'>Shop Now</Link>
                             </div>
                         }

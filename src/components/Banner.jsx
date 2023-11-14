@@ -56,7 +56,7 @@ const Banner = () => {
                         a id nisi.
                     </p>
                     <div className=" my-4">
-                        <button className="border py-2 px-2 rounded-md bg-green-500 text-white">Become a provider or seller</button>
+                        <button className="border transform hover:scale-105 transition-transform duration-300 font-semibold py-2 px-2 rounded-md bg-green-500 text-white">Become a provider or seller</button>
                     </div>
 
                     <SearchBar></SearchBar>

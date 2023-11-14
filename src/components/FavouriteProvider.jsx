@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { get_provider_request, get_provider_details } from "../store/reducers/providerReducer";
 import { useEffect, useState } from "react";
 import './topProduct.css'
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 const FavouriteProvider = () => {
 
 
@@ -47,7 +48,7 @@ const FavouriteProvider = () => {
                             {/* <div className='flex justify-center items-center absolute badge bg-red-500 text-white  font-semibold text-xs right-2 top-2'>Top</div> */}
                             <img className="h-[240px] w-64 rounded-t-xl " src={p.image} alt="images" />
                             <div className="card-body">
-                                <h2 className="card-title">
+                                <h2 className="text-lg font-semibold">
                                     {p.name}
                                     {/* <div className="">Top</div> */}
                                 </h2>
@@ -64,7 +65,13 @@ const FavouriteProvider = () => {
                                         <Rating ratings={p.rating} />
                                     </div>
                                     <div>
-                                        <Link to={`/provider/details/${p._id}`}><span className='text-md badge badge-outline'>Details</span></Link>
+
+                                        <Link to={`/provider/details/${p._id}`}>
+                                            <button className='flex justify-center items-center text-md badge transform duration-500 hover:bg-red-400 hover:text-white hover:border-red-400 badge-outline'>
+                                                <span> Details</span> <MdOutlineKeyboardArrowRight className="text-lg" />
+                                            </button>
+
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

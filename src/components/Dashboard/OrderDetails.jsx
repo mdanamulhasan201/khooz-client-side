@@ -45,11 +45,13 @@ const OrderDetails = () => {
                                     <div className='flex gap-2 '>
                                         <img className='w-[55px] h-[55px]' src={p.images[1]} alt="images" />
                                         <div className='flex  text-sm flex-col justify-start items-start'>
-                                            <Link>{p.name}</Link>
-                                            <p>
-                                                <span>Brand: {p.brand}</span>
-                                                <span>Quantity: {p.quantity}</span>
-                                            </p>
+                                            <Link className='font-semibold'>
+                                                {p.name}
+                                            </Link>
+
+                                            <p >Brand: {p.brand}</p>
+                                            <p>Quantity: <span className='font-semibold'>{p.quantity}</span></p>
+
                                         </div>
                                     </div>
                                     <div className='pl-4'>
@@ -58,7 +60,7 @@ const OrderDetails = () => {
                                         }
                                         <p className={`${p.discount ? 'line-through text-red-500' : ''}`}>{p.price} Tk</p>
                                         {
-                                            p.discount ? <p className='text-green-500'>-{p.discount}%</p> : ''
+                                            p.discount ? <p className='text-green-500'>-{p.discount}% off</p> : ''
                                         }
                                     </div>
 

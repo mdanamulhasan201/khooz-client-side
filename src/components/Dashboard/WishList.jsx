@@ -44,28 +44,32 @@ const WishList = () => {
     return (
         <div className='p-4'>
             <div className='w-full grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 gap-6 '>
-                {currentWishlist.map((p, i) => (
-                    <div key={i} className='border w-64 group  hover:shadow-md rounded'>
-                        <div className='relative overflow-hidden'>
-                            {p.discount ? <div className='flex justify-center items-center absolute badge bg-green-500 text-white font-semibold text-xs right-2 top-2'>-{p.discount}%</div> : ''}
-                            <img className='h-[240px] w-64' src={p.image} alt={p.name} />
-                            <ul className='flex text-xl text-green-500 justify-center items-center gap-2 w-full group-hover:bottom-3'>
-                                <li onClick={() => handleRemoveFromWishlist(p._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full text-red-400 hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
-                                <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all' ><FaEye /></Link>
-                                <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiOutlineShoppingCart /></li>
-                            </ul>
-                        </div>
-                        <div className='py-3 text-slate-600 px-2'>
-                            <h2>{p.name}</h2>
-                            <div className='flex justify-between items-center gap-3'>
-                                <div className='flex'>
-                                    <Rating ratings={p.rating} />
+                {currentWishlist.length > 0 ? (
+                    currentWishlist.map((p, i) => (
+                        <div key={i} className='border w-64 group hover:shadow-md rounded'>
+                            <div className='relative overflow-hidden'>
+                                {p.discount ? <div className='flex justify-center items-center absolute badge bg-green-500 text-white font-semibold text-xs right-2 top-2'>-{p.discount}%</div> : ''}
+                                <img className='h-[240px] w-64' src={p.image} alt={p.name} />
+                                <ul className='flex text-xl text-green-500 justify-center items-center gap-2 w-full group-hover:bottom-3'>
+                                    <li onClick={() => handleRemoveFromWishlist(p._id)} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full text-red-400 hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiFillHeart /></li>
+                                    <Link to={`/product/details/${p.slug}`} className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all' ><FaEye /></Link>
+                                    <li className='w-[38px] h-[38px] cursor-pointer bg-white flex justify-center items-center rounded-full hover:bg-red-400 hover:text-white hover:rotate-[720deg] transition-all'><AiOutlineShoppingCart /></li>
+                                </ul>
+                            </div>
+                            <div className='py-3 text-slate-600 px-2'>
+                                <h2>{p.name}</h2>
+                                <div className='flex justify-between items-center gap-3'>
+                                    <div className='flex'>
+                                        <Rating ratings={p.rating} />
+                                    </div>
+                                    <span className='text-lg font-bold'>{p.price} Tk</span>
                                 </div>
-                                <span className='text-lg font-bold'>{p.price} Tk</span>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                ) : (
+                    <h1 className=' text-lg font-semibold'>You have not added any product</h1>
+                )}
             </div>
 
             {/* Pagination */}
