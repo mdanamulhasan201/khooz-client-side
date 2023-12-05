@@ -12,8 +12,13 @@ const Product = () => {
     const navigate = useNavigate()
 
     const dispatch = useDispatch()
-    const { categorys, latest_product, products, priceRange, totalProduct, parPage } = useSelector(state => state.home)
+
     // console.log(products)
+    const { categorys, latest_product, products, priceRange, totalProduct, parPage } = useSelector(state => state.home)
+
+    useEffect(() => {
+        dispatch(price_range_product())
+    }, [])
 
     const [pageNumber, setPageNumber] = useState(1)
     const [category, setCategory] = useState('')
@@ -21,9 +26,6 @@ const Product = () => {
     const [state, setState] = useState({ values: [priceRange.low, priceRange.high] })
     const [searchValue, setSearchValue] = useState('')
 
-    useEffect(() => {
-        dispatch(price_range_product())
-    }, [])
 
     // price show
     useEffect(() => {
@@ -111,13 +113,13 @@ const Product = () => {
                             </div>
 
                             <div className='my-10 px-2 md:px-0'>
-                                <p className='text-xl font-bold text-gray-600 mb-5'>latest Products</p>
+                                <p className='text-xl font-bold text-gray-600 mb-5'>discount Products</p>
                                 <div className='flex flex-col justify-start gap-2 '>
 
                                     {
                                         latest_product.map((p, i) => (
                                             p.discount ? (
-                                                <Link key={i} className='flex md:flex-col xl:flex-row justify-between border' to='#'>
+                                                <Link key={i} to={`/product/details/${p.slug}`} className='flex md:flex-col xl:flex-row justify-between border'>
                                                     <img className='w-[110px] h-[110px]' src={p.images[1]} alt="images" />
                                                     <div className='px-3 flex justify-center items-center gap-1 flex-col text-slate-600'>
                                                         <h2 className='text-gray-500 font-semibold'>{p.name}</h2>

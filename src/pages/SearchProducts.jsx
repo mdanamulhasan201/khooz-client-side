@@ -84,13 +84,13 @@ const SearchProducts = () => {
                             </div>
 
                             <div className='my-10'>
-                                <p className='text-xl font-bold text-gray-600 mb-5'>latest Products</p>
+                                <p className='text-xl font-bold text-gray-600 mb-5'>Discount Products</p>
                                 <div className='px-2 md:px-0'>
 
                                     {
                                         latest_product.map((p, i) => (
                                             p.discount ? (
-                                                <Link key={i} className='flex md:flex-col xl:flex-row justify-between border' to='#'>
+                                                <Link key={i} to={`/product/details/${p.slug}`} className='flex md:flex-col xl:flex-row justify-between border'>
                                                 <img className='w-[110px] h-auto' src={p.images[1]} alt="images" />
                                                 <div className='px-3 flex justify-center items-center gap-1 flex-col text-slate-600'>
                                                     <h2 className='text-gray-500 font-semibold text-center'>{p.name}</h2>

@@ -24,6 +24,19 @@ const FavouriteProvider = () => {
 
     }, [searchValue])
 
+    const specificCategories = [
+        'Electrician',
+        'Painter',
+        'Plumber',
+        'AC Repair',
+        'Freeze Repair',
+        'CCTV Repair',
+        'Laborer',
+        'Home Maid',
+        'Photography',
+        'Home Tutor',
+    ];
+
     useEffect(() => {
         dispatch(get_provider_details(sellerId))
 
@@ -42,7 +55,7 @@ const FavouriteProvider = () => {
 
             <div className='w-full grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5'>
                 {fiveStarSellers
-                    .filter((p) => p.status === 'active')
+                    .filter((p) => p.status === 'active' && specificCategories.includes(p.shopInfo.category))
                     .map((p, i) => (
                         <div key={i} className="card mx-auto w-64 bg-base-100 border transition-all duration-500 hover:shadow-md hover:-mt-3">
                             {/* <div className='flex justify-center items-center absolute badge bg-red-500 text-white  font-semibold text-xs right-2 top-2'>Top</div> */}

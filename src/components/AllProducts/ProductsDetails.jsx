@@ -221,7 +221,7 @@ const ProductDetails = () => {
                                             />
                                         </figure>
                                     </div>
-                                    <div className="py-3 ">
+                                    <div className="py-3 md:w-10/12 w-full">
                                         {
                                             product.images && <Carousel
                                                 autoPlay={true}
@@ -233,8 +233,8 @@ const ProductDetails = () => {
                                                 {
                                                     product.images.map((img, i) => {
                                                         return (
-                                                            <div key={i} className="pr-2 flex justify-between cursor-pointer" onClick={() => setImage(img)}>
-                                                                <img className="w-full h-[80px] hover:shadow-2xl hover:border-gray-950 hover:border" src={img} alt="" />
+                                                            <div key={i} className="pr-2 flex  justify-between cursor-pointer" onClick={() => setImage(img)}>
+                                                                <img className=" h-[80px] hover:shadow-2xl hover:border-gray-950 hover:border" src={img} alt="" />
                                                             </div>
                                                         )
                                                     })
@@ -347,8 +347,8 @@ const ProductDetails = () => {
                                 <div className="w-full sm:w-full md:w-[72%] lg:w-[72%] xl:w-[72%] 2xl:w-[72%]">
                                     <div className="pr-4 sm:pr-0">
                                         <div className="grid grid-cols-2 gap-2">
-                                            <button onClick={() => setState('reviews')} className={`py-1 rounded-full px-5 hover:text-white mb-2 hover:bg-gray-500 ${state === 'reviews' ? 'bg-gray-500 text-white ' : 'bg-slate-200 text-slate-700'}`}>Reviews</button>
-                                            <button onClick={() => setState('description')} className={`py-1 px-5 mb-2 rounded-full hover:text-white hover:bg-gray-500 ${state === 'description' ? 'bg-gray-500 text-white' : 'bg-slate-200 text-slate-700'}`}>Description</button>
+                                            <button onClick={() => setState('reviews')} className={`py-1 rounded-full px-2 hover:text-white mb-2 hover:bg-gray-400 ${state === 'reviews' ? 'bg-gray-400 text-white ' : 'bg-slate-200 text-slate-700'}`}>Reviews</button>
+                                            <button onClick={() => setState('description')} className={`py-1 px-2 mb-2 rounded-full hover:text-white hover:bg-gray-400 ${state === 'description' ? 'bg-gray-400 text-white' : 'bg-slate-200 text-slate-700'}`}>Description</button>
                                         </div>
                                         <div className="">
                                             {
@@ -362,7 +362,7 @@ const ProductDetails = () => {
                                         <div className='px-3 py-1 text-slate-600 bg-slate-200 rounded'>
                                             <h2> From This Shop</h2>
                                         </div>
-                                        <div className='flex flex-col items-center gap-5 mt-3 border p-3'>
+                                        <div className='flex flex-col items-center gap-5 mt-3 p-3'>
                                             {
                                                 moreProducts.map((p, i) => {
                                                     return (

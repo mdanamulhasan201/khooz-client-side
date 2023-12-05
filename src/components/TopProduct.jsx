@@ -69,7 +69,7 @@ const TopProduct = ({ products }) => {
             <div className='w-full  grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center items-center'>
 
                 {
-                    products.map((p, i) => <div key={i} className='border rounded-lg w-64 transition-all duration-500 hover:shadow-md hover:-mt-3'>
+                    products.filter(p => p.rating === 5).slice(0, 8).map((p, i) => <div key={i} className='border rounded-lg w-64 transition-all duration-500 hover:shadow-md hover:-mt-3'>
                         <div className='relative overflow-hidden'>
 
                             {
