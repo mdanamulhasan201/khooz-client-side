@@ -8,24 +8,25 @@ const Footer = () => {
             <footer className="footer p-10 max-w-screen-xl mx-auto text-base-content">
                 <div>
                     <span className="footer-title underline">Services</span>
-                    <Link className="link link-hover">Branding</Link>
-                    <Link className="link link-hover">Design</Link>
-                    <Link className="link link-hover">Marketing</Link>
-                    <Link className="link link-hover">Advertisement</Link>
+                    <Link className="link link-hover">Providers</Link>
+                    <Link className="link link-hover">Products</Link>
+                 
                 </div>
                 <div>
                     <span className="footer-title underline">Products</span>
-                    <Link className="link link-hover">Branding</Link>
-                    <Link className="link link-hover">Design</Link>
-                    <Link className="link link-hover">Marketing</Link>
-                    <Link className="link link-hover">Advertisement</Link>
+                    <Link className="link link-hover">AC Parts</Link>
+                    <Link className="link link-hover">Freeze Parts</Link>
+                    <Link className="link link-hover">Tv Parts</Link>
+                    <Link className="link link-hover">Monitor Parts</Link>
+                    <Link className="link link-hover">CCTV Parts</Link>
+                    <Link className="link link-hover">Fan Parts</Link>
                 </div>
                 <div>
                     <span className="footer-title underline">Company</span>
                     <Link className="link link-hover">About us</Link>
                     <Link className="link link-hover">Contact</Link>
-                    <Link className="link link-hover">Jobs</Link>
-                    <Link className="link link-hover">Press kit</Link>
+                    <Link className="link link-hover">Sellers</Link>
+                    <Link className="link link-hover">Providers</Link>
                 </div>
                 <div>
                     <span className="footer-title underline">Legal</span>

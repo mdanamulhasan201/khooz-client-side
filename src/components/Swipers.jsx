@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 const images = [
-    'https://gcp-img.slatic.net/lazada/6eda8353-9bc9-4fb1-813d-84b75f68d94d_BD-1920-350.jpg',
-    'https://gcp-img.slatic.net/lazada/6eda8353-9bc9-4fb1-813d-84b75f68d94d_BD-1920-350.jpg',
+    'https://i.ibb.co/t3Z6b5b/Blue-and-Red-Geometric-Computer-Repair-Service-Banner.png',
+    'https://i.ibb.co/XtLGdBw/Red-Creative-Sale-Promo-Banner.png',
     'https://i.ibb.co/PGNHsGK/banner-two.jpg',
-    '/images/stock/photo-1665553365602-b2fb8e5d1707.jpg',
+    'https://i.ibb.co/PGNHsGK/banner-two.jpg',
 ];
 
 const Swipers = () => {
@@ -19,14 +19,14 @@ const Swipers = () => {
     }, []);
 
     return (
-        <div className='my-32 mx-auto h-48 max-w-screen-xl bg-slate-300 relative'>
+        <div className='my-32 mx-auto h-64 max-w-screen-xl bg-slate-300 relative'>
             {images.map((image, index) => (
                 <div
                     key={index}
                     className={`carousel-item w-full absolute transition-opacity duration-500 ${index === currentIndex ? 'opacity-100' : 'opacity-0'
                         }`}
                 >
-                   <img src={image} className='w-full h-48 mx-auto' alt={`Product ${index + 1}`} />
+                   <img src={image} className='w-full h-64 mx-auto' alt={`Product ${index + 1}`} />
 
                 </div>
             ))}

@@ -17,7 +17,7 @@ const Provider = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [filteredProviders, setFilteredProviders] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(3);
+    const [itemsPerPage] = useState(12);
 
 
     useEffect(() => {
@@ -87,16 +87,15 @@ const Provider = () => {
     //     ? sellers.filter((seller) => selectedCategories.includes(seller.shopInfo.category))
     //     : sellers;
 
-    // Pagination
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredProviders.slice(indexOfFirstItem, indexOfLastItem);
+  // Pagination
+const indexOfLastItem = currentPage * itemsPerPage;
+const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+const currentItems = filteredProviders.slice(indexOfFirstItem, indexOfLastItem);
 
     // Function to handle page change
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-
 
     return (
         <div className="py-20">
@@ -163,7 +162,7 @@ const Provider = () => {
 
                                 </div>
                                 <div className="pb-8">
-                                    <Providers sellers={filteredProviders} />
+                                    <Providers sellers={currentItems} />
                                 </div>
                                 {/* Pagination */}
                                 <div className="flex justify-center mt-4">
@@ -180,6 +179,7 @@ const Provider = () => {
                                         ))}
                                     </ul>
                                 </div>
+
 
                             </div>
                         </div>

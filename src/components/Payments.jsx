@@ -10,7 +10,7 @@ const Payments = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <div className='py-20 container mx-auto'>
+            <div className='py-20 max-w-screen-xl mx-auto'>
                 <section className=''>
                     <div className='w-full sm:w-[90%] md:w-[90%] lg:w-[90%] mx-auto mt-4'>
                         <div className=' flex items-center gap-5 flex-col md:flex-row sm:flex-col-reverse'>
@@ -19,7 +19,7 @@ const Payments = () => {
                                     <div className='flex flex-wrap'>
                                         <div onClick={() => setPaymentMethod('stripe')} className={`w-[20%] border-r cursor-pointer py-8 px-12 ${paymentMethod === 'stripe' ? 'bg-white border' : 'bg-[#F8F5FF]'}`}>
                                             <div className='flex flex-col gap-[3px] justify-center items-center'>
-                                                <img className='' src='http://localhost:3001/images/payment/stripe.png' alt="stripe" />
+                                                <img className='' src='http://localhost:3000/images/payment/stripe.png' alt="stripe" />
                                                 <span className='text-slate-600 '>Stripe</span>
 
                                             </div>

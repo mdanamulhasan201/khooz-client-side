@@ -53,10 +53,10 @@ const Product = () => {
                 category,
                 sortPrice,
                 pageNumber
-
             })
-        )
-    }, [state.values[0], state.values[1], category, sortPrice, pageNumber])
+        );
+    }, [state.values[0], state.values[1], category, sortPrice, pageNumber]);
+    
 
     const search = () => {
         navigate(`/products/search?category=${category}&&value=${searchValue}`)
