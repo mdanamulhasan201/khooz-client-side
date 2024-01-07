@@ -137,36 +137,52 @@ const ProductDetails = () => {
     // buy products 
 
     const buy = () => {
-        let price = 0;
-        if (product.discount !== 0) {
-            price = product.price - Math.floor((product.price * product.discount) / 100)
-        } else {
-            price = product.price
-        }
-        // formate create
-        const obj = [
-            {
-                sellerId: product.sellerId,
-                shopName: product.shopName,
-                price: quantity * (price - Math.floor((price * 5) / 100)), //owner 5% cut
-                products: [
-                    {
-                        quantity,
-                        productInfo: product
-                    }
-                ]
-            }
-        ]
-        navigate('/shipping', {
-            state: {
-                products: obj,
-                price: price * quantity,
-                delivery_cost: 100,
-                items: 1
+        // Check if the user is logged in
 
+
+        if (userInfo) {
+            let price = 0;
+
+            // Calculate discounted price
+            if (product.discount !== 0) {
+                price = product.price - Math.floor((product.price * product.discount) / 100);
+            } else {
+                price = product.price;
             }
-        })
-    }
+
+            // Calculate total price with owner's 5% cut
+            const totalPrice = quantity * (price - Math.floor((price * 5) / 100));
+
+            // Create the formatted object for shipping
+            const shippingObject = [
+                {
+                    sellerId: product.sellerId,
+                    shopName: product.shopName,
+                    price: totalPrice,
+                    products: [
+                        {
+                            quantity,
+                            productInfo: product
+                        }
+                    ]
+                }
+            ];
+
+            // Navigate to the shipping page with necessary details
+            navigate('/shipping', {
+                state: {
+                    products: shippingObject,
+                    price: price * quantity,
+                    delivery_cost: 100,
+                    items: 1
+                }
+            });
+        } else {
+            // If the user is not logged in, redirect them to the login page
+            navigate('/login');
+        }
+    };
+
 
     const handleZoom = (e) => {
         const zoomer = e.currentTarget;
