@@ -5,7 +5,7 @@ import api from "../../api/api";
 export const get_provider_request = createAsyncThunk(
   "provider/get_provider_request",
   // admin_login function j khan theke call korbo shy khane para meter akare info (information pathabo)
-  async ({ searchValue }, { rejectWithValue, fulfillWithValue }) => {
+  async ({ searchValue }, {  fulfillWithValue, rejectWithValue }) => {
     try {
       const { data } = await api.get(
         `/get-provider-request?searchValue=${searchValue}`,
@@ -18,6 +18,7 @@ export const get_provider_request = createAsyncThunk(
 
       return fulfillWithValue(data); //token and success message pass
     } catch (error) {
+      console.log(error.response)
       return rejectWithValue(error.response.data);
     }
   }
@@ -25,7 +26,7 @@ export const get_provider_request = createAsyncThunk(
 export const get_provider_details = createAsyncThunk(
   "seller/get_provider_details",
   // admin_login function j khan theke call korbo shy khane para meter akare info (information pathabo)
-  async (sellerId, { rejectWithValue, fulfillWithValue }) => {
+  async (sellerId, { fulfillWithValue, rejectWithValue }) => {
     try {
       const { data } = await api.get(`/get-provider-details/${sellerId}`, {
         // response to distructure data

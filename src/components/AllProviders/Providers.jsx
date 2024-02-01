@@ -24,11 +24,11 @@ const Providers = ({ sellers }) => {
         <>
 
 
-            {/* <h2 className='text-center text-lg mb-7  text-slate-600 font-semibold'>
+            <h2 className='text-center text-lg mb-7  text-slate-600 font-semibold'>
                 {sellers.length === 0
                     ? 'No results found'
                     : `Results found: ${sellers.length}`}
-            </h2> */}
+            </h2>
 
             <div className='w-full grid md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
 

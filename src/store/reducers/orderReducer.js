@@ -40,7 +40,7 @@ export const place_order = createAsyncThunk(
 //  get orders
 export const get_orders = createAsyncThunk(
   "order/get_orders",
-  async ({ customerId, status }, { rejectWithValue, fulfillWithValue }) => {
+  async ({ customerId, status }, { fulfillWithValue, rejectWithValue }) => {
     try {
       const { data } = await api.get(
         `home/customer/get-orders/${customerId}/${status}`
@@ -48,6 +48,7 @@ export const get_orders = createAsyncThunk(
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response);
+      return rejectWithValue(error);
     }
   }
 );
@@ -62,6 +63,7 @@ export const get_order_details = createAsyncThunk(
       return fulfillWithValue(data);
     } catch (error) {
       console.log(error.response);
+      return rejectWithValue(error);
     }
   }
 );
